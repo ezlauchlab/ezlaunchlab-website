@@ -478,7 +478,7 @@ try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
         </a>
       </div>
     </div>
-    <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xaqlkejr" method="POST" onsubmit="return handleFormSubmit(event)">
       <div class="form-row">
         <div class="form-group"><label>Your Name</label><input type="text" name="name" id="fName" placeholder="Jane Smith" required></div>
         <div class="form-group"><label>Brand Name</label><input type="text" name="brand" id="fBrand" placeholder="Your Amazon Brand" required></div>
@@ -488,7 +488,7 @@ try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
         <div class="form-group">
           <label>Phone Number</label>
           <div class="phone-row">
-            <select class="phone-code" name="phone_code" id="fPhoneCode">
+            <select class="phone-code" id="fPhoneCode" onchange="document.getElementById('fPhoneFull').value=this.value+' '+document.getElementById('fPhone').value">
               <option value="+1" selected>US +1</option>
               <option value="+1">CA +1</option>
               <option value="+44">UK +44</option>
@@ -498,47 +498,35 @@ try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
               <option value="+34">ES +34</option>
               <option value="+39">IT +39</option>
               <option value="+31">NL +31</option>
-              <option value="+46">SE +46</option>
-              <option value="+47">NO +47</option>
-              <option value="+45">DK +45</option>
-              <option value="+41">CH +41</option>
-              <option value="+43">AT +43</option>
               <option value="+48">PL +48</option>
               <option value="+380">UA +380</option>
-              <option value="+7">RU +7</option>
               <option value="+81">JP +81</option>
-              <option value="+82">KR +82</option>
-              <option value="+86">CN +86</option>
               <option value="+91">IN +91</option>
               <option value="+55">BR +55</option>
               <option value="+52">MX +52</option>
-              <option value="+27">ZA +27</option>
               <option value="+971">AE +971</option>
-              <option value="+966">SA +966</option>
               <option value="+972">IL +972</option>
-              <option value="+65">SG +65</option>
-              <option value="+60">MY +60</option>
-              <option value="+63">PH +63</option>
               <option value="+234">NG +234</option>
-              <option value="+254">KE +254</option>
-              <option value="+20">EG +20</option>
             </select>
-            <input class="phone-number" type="tel" name="phone" id="fPhone" placeholder="555 123-4567">
+            <input class="phone-number" type="tel" id="fPhone" placeholder="555 123-4567" oninput="document.getElementById('fPhoneFull').value=document.getElementById('fPhoneCode').value+' '+this.value">
           </div>
+          <input type="hidden" name="phone" id="fPhoneFull" value="+1 ">
         </div>
       </div>
       <div class="form-group"><label>Monthly Revenue</label>
         <select name="revenue" id="fRevenue">
           <option value="">Select range</option>
-          <option>$10K – $30K / month</option>
-          <option>$30K – $70K / month</option>
-          <option>$70K – $150K / month</option>
+          <option>$10K - $30K / month</option>
+          <option>$30K - $70K / month</option>
+          <option>$70K - $150K / month</option>
           <option>$150K+ / month</option>
         </select>
       </div>
-      <div class="form-group"><label>Current ACoS (if known)</label><input type="text" name="acos" id="fAcos" placeholder="e.g. 35% — or I don't know yet"></div>
+      <div class="form-group"><label>Current ACoS (if known)</label><input type="text" name="acos" id="fAcos" placeholder="e.g. 35% or I don't know yet"></div>
       <div class="form-group"><label>Biggest PPC challenge right now</label><textarea name="challenge" id="fChallenge" placeholder="Tell us what's frustrating you most about your Amazon ads..."></textarea></div>
-      <button type="submit" class="form-submit" id="formSubmitBtn">Book My Free Audit →</button>
+      <input type="hidden" name="_next" value="https://cal.com/easy-lauch-jqk5yn">
+      <input type="hidden" name="_subject" value="New PPC Audit Request - EZLaunchLab">
+      <button type="submit" class="form-submit" id="formSubmitBtn">Book My Free Audit &rarr;</button>
     </form>
   </div>
 </section>
@@ -555,40 +543,21 @@ try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 async function handleFormSubmit(e){
-  e.preventDefault();
-  const btn=document.getElementById('formSubmitBtn');
-  btn.textContent='Submitting...';btn.style.background='#166534';btn.style.color='#fff';
-
-  const name=document.getElementById('fName').value;
-  const brand=document.getElementById('fBrand').value;
-  const email=document.getElementById('fEmail').value;
-  const phoneCode=document.getElementById('fPhoneCode').value;
-  const phone=phoneCode+' '+document.getElementById('fPhone').value.trim();
-  const revenue=document.getElementById('fRevenue').value;
-  const acos=document.getElementById('fAcos').value;
-  const challenge=document.getElementById('fChallenge').value;
-
-  const formData={name,brand,email,phone,revenue,acos,challenge,_subject:'New PPC Audit Request — EZLaunchLab'};
-
-  // 1) Send to Formspree (email notification)
+  // Try to also send to Supabase for CRM
   try{
-    await fetch('https://formspree.io/f/xaqlkejr',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(formData)});
-  }catch(e){console.log('Formspree error:',e)}
-
-  // 2) Send to Supabase (CRM database)
-  try{
-    if(sb && SUPABASE_URL!=='YOUR_SUPABASE_URL'){
-      await sb.from('leads').insert({name,brand,email,phone:phone.trim(),revenue,acos,challenge,added_to_crm:false});
+    if(typeof sb!=='undefined' && sb){
+      var name=document.getElementById('fName').value;
+      var brand=document.getElementById('fBrand').value;
+      var email=document.getElementById('fEmail').value;
+      var phone=document.getElementById('fPhoneFull').value.trim();
+      var revenue=document.getElementById('fRevenue').value;
+      var acos=document.getElementById('fAcos').value;
+      var challenge=document.getElementById('fChallenge').value;
+      sb.from('leads').insert({name:name,brand:brand,email:email,phone:phone,revenue:revenue,acos:acos,challenge:challenge,added_to_crm:false});
     }
-  }catch(e){console.log('Supabase error:',e)}
-
-  // 3) Redirect to booking
-  btn.textContent='Redirecting to booking...';
-  setTimeout(function(){
-    window.open('https://cal.com/easy-lauch-jqk5yn','_blank');
-    btn.textContent='Book My Free Audit →';btn.style.background='';btn.style.color='';
-    document.getElementById('contactForm').reset();
-  },800);
+  }catch(err){console.log('Supabase:',err)}
+  // Let form submit normally to Formspree
+  return true;
 }
 
 function handleSubmit(e){
