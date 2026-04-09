@@ -189,6 +189,16 @@ footer p{font-size:12px;color:var(--fg-muted)}
   .phone-code{width:100px}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ═══════════════════════════════════════════════
+//  SUPABASE CONFIG — paste your keys here
+// ═══════════════════════════════════════════════
+const SUPABASE_URL = 'https://mkxbjcljljmygruoodvv.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Q717ycpQCxCydy_pyqaRGQ_ubE_d_ZE';
+let sb;
+try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
+</script>
 </head>
 <body>
 
@@ -459,7 +469,7 @@ footer p{font-size:12px;color:var(--fg-muted)}
       <p>Tell us a bit about your brand and we'll be in touch within 24 hours to schedule your free audit call. No long-term commitment required.</p>
       <div class="no-contract-badge">🔓 No long-term contracts · Cancel anytime</div>
       <div class="contact-detail">
-        <a href="mailto:easylauchlab@gmail.com">✉️ &nbsp;easylauchlab@gmail.com</a>
+        <a href="/cdn-cgi/l/email-protection#88ede9fbf1e4e9fdebe0e4e9eac8efe5e9e1e4a6ebe7e5">✉️ &nbsp;<span class="__cf_email__" data-cfemail="d5b0b4a6acb9b4a0b6bdb9b4b795b2b8b4bcb9fbb6bab8">[email&#160;protected]</span></a>
         <a href="#">💬 &nbsp;Response within a few hours</a>
       </div>
       <div style="display:flex;gap:10px;margin-top:8px">
@@ -468,17 +478,17 @@ footer p{font-size:12px;color:var(--fg-muted)}
         </a>
       </div>
     </div>
-    <form class="contact-form" action="https://formspree.io/f/xaqlkejr" method="POST">
+    <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
       <div class="form-row">
-        <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Jane Smith" required></div>
-        <div class="form-group"><label>Brand Name</label><input type="text" name="brand" placeholder="Your Amazon Brand" required></div>
+        <div class="form-group"><label>Your Name</label><input type="text" name="name" id="fName" placeholder="Jane Smith" required></div>
+        <div class="form-group"><label>Brand Name</label><input type="text" name="brand" id="fBrand" placeholder="Your Amazon Brand" required></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@brand.com" required></div>
+        <div class="form-group"><label>Email</label><input type="email" name="email" id="fEmail" placeholder="you@brand.com" required></div>
         <div class="form-group">
           <label>Phone Number</label>
           <div class="phone-row">
-            <select class="phone-code" name="phone_code">
+            <select class="phone-code" name="phone_code" id="fPhoneCode">
               <option value="+1" selected>US +1</option>
               <option value="+1">CA +1</option>
               <option value="+44">UK +44</option>
@@ -513,12 +523,12 @@ footer p{font-size:12px;color:var(--fg-muted)}
               <option value="+254">KE +254</option>
               <option value="+20">EG +20</option>
             </select>
-            <input class="phone-number" type="tel" name="phone" placeholder="555 123-4567">
+            <input class="phone-number" type="tel" name="phone" id="fPhone" placeholder="555 123-4567">
           </div>
         </div>
       </div>
       <div class="form-group"><label>Monthly Revenue</label>
-        <select name="revenue">
+        <select name="revenue" id="fRevenue">
           <option value="">Select range</option>
           <option>$10K – $30K / month</option>
           <option>$30K – $70K / month</option>
@@ -526,11 +536,9 @@ footer p{font-size:12px;color:var(--fg-muted)}
           <option>$150K+ / month</option>
         </select>
       </div>
-      <div class="form-group"><label>Current ACoS (if known)</label><input type="text" name="acos" placeholder="e.g. 35% — or I don't know yet"></div>
-      <div class="form-group"><label>Biggest PPC challenge right now</label><textarea name="challenge" placeholder="Tell us what's frustrating you most about your Amazon ads..."></textarea></div>
-      <input type="hidden" name="_next" value="https://cal.com/easy-lauch-jqk5yn">
-      <input type="hidden" name="_subject" value="New PPC Audit Request — EZLaunchLab">
-      <button type="submit" class="form-submit">Book My Free Audit →</button>
+      <div class="form-group"><label>Current ACoS (if known)</label><input type="text" name="acos" id="fAcos" placeholder="e.g. 35% — or I don't know yet"></div>
+      <div class="form-group"><label>Biggest PPC challenge right now</label><textarea name="challenge" id="fChallenge" placeholder="Tell us what's frustrating you most about your Amazon ads..."></textarea></div>
+      <button type="submit" class="form-submit" id="formSubmitBtn">Book My Free Audit →</button>
     </form>
   </div>
 </section>
@@ -545,7 +553,44 @@ footer p{font-size:12px;color:var(--fg-muted)}
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+async function handleFormSubmit(e){
+  e.preventDefault();
+  const btn=document.getElementById('formSubmitBtn');
+  btn.textContent='Submitting...';btn.style.background='#166534';btn.style.color='#fff';
+
+  const name=document.getElementById('fName').value;
+  const brand=document.getElementById('fBrand').value;
+  const email=document.getElementById('fEmail').value;
+  const phoneCode=document.getElementById('fPhoneCode').value;
+  const phone=phoneCode+' '+document.getElementById('fPhone').value.trim();
+  const revenue=document.getElementById('fRevenue').value;
+  const acos=document.getElementById('fAcos').value;
+  const challenge=document.getElementById('fChallenge').value;
+
+  const formData={name,brand,email,phone,revenue,acos,challenge,_subject:'New PPC Audit Request — EZLaunchLab'};
+
+  // 1) Send to Formspree (email notification)
+  try{
+    await fetch('https://formspree.io/f/xaqlkejr',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(formData)});
+  }catch(e){console.log('Formspree error:',e)}
+
+  // 2) Send to Supabase (CRM database)
+  try{
+    if(sb && SUPABASE_URL!=='YOUR_SUPABASE_URL'){
+      await sb.from('leads').insert({name,brand,email,phone:phone.trim(),revenue,acos,challenge,added_to_crm:false});
+    }
+  }catch(e){console.log('Supabase error:',e)}
+
+  // 3) Redirect to booking
+  btn.textContent='Redirecting to booking...';
+  setTimeout(function(){
+    window.open('https://cal.com/easy-lauch-jqk5yn','_blank');
+    btn.textContent='Book My Free Audit →';btn.style.background='';btn.style.color='';
+    document.getElementById('contactForm').reset();
+  },800);
+}
+
 function handleSubmit(e){
   e.preventDefault();
   const btn=e.target.querySelector('.form-submit');
@@ -559,10 +604,4 @@ function handleSubmit(e){
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}});
 },{threshold:.08});
-document.querySelectorAll('.problem-card,.how-step,.why-card,.result-card,.testi-card,.forwho-card,.proof-item').forEach(el=>{
-  el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity .5s,transform .5s';
-  obs.observe(el);
-});
-</script>
-</body>
-</html>
+document.querySelectorAll('.problem-c
