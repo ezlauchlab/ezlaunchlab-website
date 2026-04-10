@@ -472,7 +472,7 @@ var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI
         </a>
       </div>
     </div>
-    <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event);return false">
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xaqlkejr" method="POST">
       <div class="form-row">
         <div class="form-group"><label>Your Name</label><input type="text" name="name" id="fName" placeholder="Jane Smith" required></div>
         <div class="form-group"><label>Brand Name</label><input type="text" name="brand" id="fBrand" placeholder="Your Amazon Brand" required></div>
@@ -533,24 +533,61 @@ var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function handleFormSubmit(e){
-  e.preventDefault();
-  var btn=document.getElementById('formSubmitBtn');
-  btn.textContent='Submitting...';btn.style.background='#166534';btn.style.color='#fff';
-  var name=document.getElementById('fName').value;
-  var brand=document.getElementById('fBrand').value;
-  var email=document.getElementById('fEmail').value;
-  var phone=document.getElementById('fPhoneFull').value.trim();
-  var revenue=document.getElementById('fRevenue').value;
-  var acos=document.getElementById('fAcos').value;
-  var challenge=document.getElementById('fChallenge').value;
-  if(!name||!email){btn.textContent='Please fill name and email';btn.style.background='#ef4444';setTimeout(function(){btn.textContent='Book My Free Audit';btn.style.background='';btn.style.color=''},2000);return}
-  var done=0,total=2;
-  function check(){done++;if(done>=total){btn.textContent='Success! Redirecting...';setTimeout(function(){window.open('https://cal.com/easy-lauch-jqk5yn','_blank');btn.textContent='Book My Free Audit';btn.style.background='';btn.style.color='';document.getElementById('contactForm').reset()},800)}}
-  fetch('https://formspree.io/f/xaqlkejr',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name:name,brand:brand,email:email,phone:phone,revenue:revenue,acos:acos,challenge:challenge,_subject:'New PPC Audit Request - EZLaunchLab'})}).then(function(){check()}).catch(function(){check()});
-  fetch(SB_URL+'/rest/v1/leads',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'return=minimal'},body:JSON.stringify({name:name,brand:brand,email:email,phone:phone,revenue:revenue,acos:acos,challenge:challenge,added_to_crm:false})}).then(function(){check()}).catch(function(){check()});
-}
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('formSubmitBtn');
+      btn.textContent = 'Submitting...';
+      btn.style.background = '#166534';
+      btn.style.color = '#fff';
+      var name = document.getElementById('fName').value;
+      var brand = document.getElementById('fBrand').value;
+      var email = document.getElementById('fEmail').value;
+      var phone = document.getElementById('fPhoneFull').value.trim();
+      var revenue = document.getElementById('fRevenue').value;
+      var acos = document.getElementById('fAcos').value;
+      var challenge = document.getElementById('fChallenge').value;
+      if (!name || !email) {
+        btn.textContent = 'Fill name and email!';
+        btn.style.background = '#ef4444';
+        setTimeout(function() { btn.textContent = 'Book My Free Audit'; btn.style.background = ''; btn.style.color = ''; }, 2000);
+        return;
+      }
+      var formData = {name:name, brand:brand, email:email, phone:phone, revenue:revenue, acos:acos, challenge:challenge};
+      var done = 0;
+      function afterBoth() {
+        done++;
+        if (done >= 2) {
+          btn.textContent = 'Success! Redirecting...';
+          setTimeout(function() {
+            window.open('https://cal.com/easy-lauch-jqk5yn', '_blank');
+            btn.textContent = 'Book My Free Audit';
+            btn.style.background = '';
+            btn.style.color = '';
+            form.reset();
+          }, 800);
+        }
+      }
+      // Send to Formspree
+      fetch('https://formspree.io/f/xaqlkejr', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        body: JSON.stringify(Object.assign({}, formData, {_subject: 'New PPC Audit Request - EZLaunchLab'}))
+      }).then(afterBoth).catch(afterBoth);
+      // Send to Supabase
+      fetch(SB_URL + '/rest/v1/leads', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Prefer': 'return=minimal'},
+        body: JSON.stringify(Object.assign({}, formData, {added_to_crm: false}))
+      }).then(afterBoth).catch(afterBoth);
+    });
+  }
+});
+</script><script>
+function noop(){}
 
 function handleSubmit(e){
   e.preventDefault();
