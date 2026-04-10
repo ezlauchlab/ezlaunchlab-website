@@ -308,7 +308,7 @@ footer p{font-size:12px;color:var(--fg-muted)}
       <p>Tell us a bit about your brand and we'll be in touch within 24 hours to schedule your free audit call. No long-term commitment required.</p>
       <div class="no-contract-badge">No long-term contracts - Cancel anytime</div>
       <div class="contact-detail">
-        <a href="mailto:easylauchlab@gmail.com">easylauchlab@gmail.com</a>
+        <a href="/cdn-cgi/l/email-protection#f0959183899c918593989c9192b0979d91999cde939f9d"><span class="__cf_email__" data-cfemail="086d697b7164697d6b6064696a486f65696164266b6765">[email&#160;protected]</span></a>
         <a href="#">Response within a few hours</a>
       </div>
       <div style="display:flex;gap:10px;margin-top:8px">
@@ -360,37 +360,36 @@ footer p{font-size:12px;color:var(--fg-muted)}
   <p>2025 EZLaunchLab. Amazon PPC Agency. All rights reserved.</p>
   <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
 </footer>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function ezSubmit(){
-  try{
-    var f=document.querySelector('.contact-form');
-    var fd={
-      name:f.querySelector('[name=name]').value,
-      brand:f.querySelector('[name=brand]').value,
-      email:f.querySelector('[name=email]').value,
-      phone:(document.getElementById('ezpc').value||'')+' '+(f.querySelector('[name=phone]').value||''),
-      revenue:f.querySelector('[name=revenue]').value,
-      acos:f.querySelector('[name=acos]').value,
-      challenge:f.querySelector('[name=challenge]').value,
-      added_to_crm:false
-    };
-    var x=new XMLHttpRequest();
-    x.open('POST','https://mkxbjcljljmygruoodvv.supabase.co/rest/v1/leads',false);
-    x.setRequestHeader('Content-Type','application/json');
-    x.setRequestHeader('apikey','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1reGJqY2xqbGpteWdydW9vZHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NTg5NTgsImV4cCI6MjA5MTMzNDk1OH0.-s7YhaLGv99e_YvJ_bEh_7n4BlaNBF0nPFH5D-UHA9A');
-    x.setRequestHeader('Authorization','Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1reGJqY2xqbGpteWdydW9vZHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NTg5NTgsImV4cCI6MjA5MTMzNDk1OH0.-s7YhaLGv99e_YvJ_bEh_7n4BlaNBF0nPFH5D-UHA9A');
-    x.setRequestHeader('Prefer','return=minimal');
-    x.send(JSON.stringify(fd));
-  }catch(e){}
-  return true;
+  var f=document.querySelector('.contact-form');
+  var btn=f.querySelector('.form-submit');
+  btn.textContent='Submitting...';btn.style.background='#166534';btn.style.color='#fff';
+  var fd={
+    name:f.querySelector('[name=name]').value,
+    brand:f.querySelector('[name=brand]').value,
+    email:f.querySelector('[name=email]').value,
+    phone:(document.getElementById('ezpc').value||'')+' '+(f.querySelector('[name=phone]').value||''),
+    revenue:f.querySelector('[name=revenue]').value,
+    acos:f.querySelector('[name=acos]').value,
+    challenge:f.querySelector('[name=challenge]').value,
+    added_to_crm:false
+  };
+  var k='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1reGJqY2xqbGpteWdydW9vZHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NTg5NTgsImV4cCI6MjA5MTMzNDk1OH0.-s7YhaLGv99e_YvJ_bEh_7n4BlaNBF0nPFH5D-UHA9A';
+  fetch('https://mkxbjcljljmygruoodvv.supabase.co/rest/v1/leads',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':k,'Authorization':'Bearer '+k,'Prefer':'return=minimal'},
+    body:JSON.stringify(fd)
+  }).then(function(){
+    f.removeAttribute('onsubmit');
+    f.submit();
+  }).catch(function(){
+    f.removeAttribute('onsubmit');
+    f.submit();
+  });
+  return false;
 }
 var obs=new IntersectionObserver(function(entries){
   entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}});
 },{threshold:.08});
-document.querySelectorAll('.problem-card,.how-step,.why-card,.result-card,.testi-card,.forwho-card,.proof-item').forEach(function(el){
-  el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity .5s,transform .5s';
-  obs.observe(el);
-});
-</script>
-</body>
-</html>
+document.querySelectorAll('.problem-card,.how
