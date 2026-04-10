@@ -3,86 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EZLaunchLab — Amazon PPC Agency</title>
+<title>EZLaunchLab - Amazon PPC Agency</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<script>
+function ezSubmit(){var f=document.querySelector('.contact-form');var btn=f.querySelector('.form-submit');btn.textContent='Submitting...';btn.style.background='#166534';btn.style.color='#fff';var fd={name:f.querySelector('[name=name]').value,brand:f.querySelector('[name=brand]').value,email:f.querySelector('[name=email]').value,phone:(document.getElementById('ezpc').value||'')+' '+(f.querySelector('[name=phone]').value||''),revenue:f.querySelector('[name=revenue]').value,acos:f.querySelector('[name=acos]').value,challenge:f.querySelector('[name=challenge]').value,added_to_crm:false};var k='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1reGJqY2xqbGpteWdydW9vZHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NTg5NTgsImV4cCI6MjA5MTMzNDk1OH0.-s7YhaLGv99e_YvJ_bEh_7n4BlaNBF0nPFH5D-UHA9A';fetch('https://mkxbjcljljmygruoodvv.supabase.co/rest/v1/leads',{method:'POST',headers:{'Content-Type':'application/json','apikey':k,'Authorization':'Bearer '+k,'Prefer':'return=minimal'},body:JSON.stringify(fd)}).then(function(){f.removeAttribute('onsubmit');f.submit()}).catch(function(){f.removeAttribute('onsubmit');f.submit()});return false}
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#121212;--bg2:#1E1E24;--bg-light:#E5E7EB;
-  --fg:#F5F5F5;--fg-muted:#9CA3AF;
-  --accent:#2563EB;--accent-hover:#1d4ed8;
-  --gold:#D4AF37;--border:#2a2a32;--card:#1a1a22;
-}
+:root{--bg:#121212;--bg2:#1E1E24;--bg-light:#E5E7EB;--fg:#F5F5F5;--fg-muted:#9CA3AF;--accent:#2563EB;--accent-hover:#1d4ed8;--gold:#D4AF37;--border:#2a2a32;--card:#1a1a22}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--fg);font-family:'Open Sans',sans-serif;overflow-x:hidden}
 h1,h2,h3,.logo,.btn,.section-title,.nav-cta{font-family:'Montserrat',sans-serif}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 60px;backdrop-filter:blur(14px);background:rgba(18,18,18,.88);border-bottom:1px solid var(--border)}
-.logo{font-size:20px;font-weight:900;letter-spacing:.04em;color:var(--fg)}
-.logo span{color:var(--accent)}
+.logo{font-size:20px;font-weight:900;letter-spacing:.04em;color:var(--fg)}.logo span{color:var(--accent)}
 nav ul{display:flex;gap:32px;list-style:none}
 nav ul a{color:var(--fg-muted);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;transition:color .2s}
 nav ul a:hover{color:var(--fg)}
-.nav-cta{background:var(--gold);color:#121212;padding:11px 22px;border-radius:3px;font-size:12px;font-weight:800;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:background .2s;font-family:'Montserrat',sans-serif}
-.nav-cta:hover{background:#c9a52e}
+.nav-cta{background:var(--gold);color:#121212;padding:11px 22px;border-radius:3px;font-size:12px;font-weight:800;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:background .2s;font-family:'Montserrat',sans-serif;border:none;cursor:pointer}.nav-cta:hover{background:#c9a52e}
 #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 60px 80px;position:relative;overflow:hidden;background:var(--bg2)}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.05) 1px,transparent 1px);background-size:64px 64px}
-.hero-glow{position:absolute;top:-100px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(37,99,235,.12) 0%,transparent 70%);pointer-events:none;z-index:0}
-.hero-glow2{position:absolute;bottom:-100px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(212,175,55,.07) 0%,transparent 70%);pointer-events:none;z-index:0}
+.hero-glow{position:absolute;top:-100px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(37,99,235,.12) 0%,transparent 70%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:-100px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(212,175,55,.07) 0%,transparent 70%);pointer-events:none}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.3);color:var(--accent);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:7px 14px;border-radius:2px;margin-bottom:28px}
-.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
 h1{font-size:clamp(42px,6.5vw,96px);font-weight:900;line-height:.95;letter-spacing:-.03em;text-transform:uppercase;position:relative;z-index:1;max-width:820px}
 h1 em{font-style:normal;color:var(--accent)}
-h1 .gold{color:var(--gold)}
-.hero-sub{margin-top:28px;max-width:520px}
-.hero-sub p{font-size:16px;line-height:1.8;color:var(--fg-muted)}
-.hero-sub p strong{color:var(--fg);font-weight:600}
+.hero-sub{margin-top:28px;max-width:520px}.hero-sub p{font-size:16px;line-height:1.8;color:var(--fg-muted)}.hero-sub p strong{color:var(--fg);font-weight:600}
 .hero-ctas{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 28px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-radius:3px;transition:all .2s;cursor:pointer;border:none;font-family:'Montserrat',sans-serif}
-.btn-gold{background:var(--gold);color:#121212}
-.btn-gold:hover{background:#c9a52e}
-.btn-outline{background:transparent;color:var(--fg);border:1px solid var(--border)}
-.btn-outline:hover{border-color:#555}
+.btn-gold{background:var(--gold);color:#121212}.btn-gold:hover{background:#c9a52e}
+.btn-outline{background:transparent;color:var(--fg);border:1px solid var(--border)}.btn-outline:hover{border-color:#555}
 .hero-proof{margin-top:56px;display:flex;gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden;max-width:600px}
-.proof-item{flex:1;padding:20px 24px;border-right:1px solid var(--border);background:rgba(255,255,255,.02)}
-.proof-item:last-child{border-right:none}
-.proof-num{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:var(--fg);letter-spacing:-.03em}
-.proof-num span{color:var(--accent)}
-.proof-num .g{color:var(--gold)}
+.proof-item{flex:1;padding:20px 24px;border-right:1px solid var(--border);background:rgba(255,255,255,.02)}.proof-item:last-child{border-right:none}
+.proof-num{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:var(--fg);letter-spacing:-.03em}.proof-num span{color:var(--accent)}.proof-num .g{color:var(--gold)}
 .proof-label{font-size:11px;color:var(--fg-muted);margin-top:4px;letter-spacing:.06em}
 #forwho{background:var(--bg);padding:80px 60px}
 .forwho-inner{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);max-width:1000px;margin:0 auto}
-.forwho-card{background:var(--card);padding:40px}
-.forwho-card.yes{border-top:3px solid var(--accent)}
-.forwho-card.no{border-top:3px solid #3a3a3a}
+.forwho-card{background:var(--card);padding:40px}.forwho-card.yes{border-top:3px solid var(--accent)}.forwho-card.no{border-top:3px solid #3a3a3a}
 .forwho-card h3{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin-bottom:24px}
-.forwho-card.yes h3{color:var(--accent)}
-.forwho-card.no h3{color:var(--fg-muted)}
+.forwho-card.yes h3{color:var(--accent)}.forwho-card.no h3{color:var(--fg-muted)}
 .forwho-list{display:flex;flex-direction:column;gap:12px}
 .forwho-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.6;color:var(--fg-muted)}
 .forwho-item .icon{flex-shrink:0;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:2px}
-.forwho-card.yes .icon{background:rgba(37,99,235,.15);color:var(--accent)}
-.forwho-card.no .icon{background:rgba(255,255,255,.05);color:#555}
+.forwho-card.yes .icon{background:rgba(37,99,235,.15);color:var(--accent)}.forwho-card.no .icon{background:rgba(255,255,255,.05);color:#555}
 .forwho-title{text-align:center;margin-bottom:40px}
 #problem{background:var(--bg2);padding:120px 60px}
 .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:60px}
-.problem-card{background:var(--card);padding:40px 32px}
-.problem-icon{font-size:32px;margin-bottom:20px}
-.problem-card h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:12px;color:var(--fg)}
+.problem-card{background:var(--card);padding:40px 32px}.problem-icon{font-size:32px;margin-bottom:20px}
+.problem-card h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;margin-bottom:12px;color:var(--fg)}
 .problem-card p{font-size:14px;line-height:1.75;color:var(--fg-muted)}
 .problem-card .pill{display:inline-block;margin-top:16px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(37,99,235,.3);padding:4px 10px;border-radius:2px}
 #how{background:var(--bg);padding:120px 60px}
 .how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:60px}
-.how-step{background:var(--card);padding:40px 32px;position:relative}
-.step-num{font-family:'Montserrat',sans-serif;font-size:48px;font-weight:900;color:rgba(37,99,235,.12);line-height:1;margin-bottom:20px;letter-spacing:-.04em}
-.how-step h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:10px}
+.how-step{background:var(--card);padding:40px 32px}
+.step-num{font-family:'Montserrat',sans-serif;font-size:48px;font-weight:900;color:rgba(37,99,235,.12);line-height:1;margin-bottom:20px}
+.how-step h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;margin-bottom:10px}
 .how-step p{font-size:13px;line-height:1.7;color:var(--fg-muted)}
 #why{background:var(--bg2);padding:120px 60px}
 .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:60px}
-.why-card{background:var(--card);border:1px solid var(--border);padding:36px;border-radius:3px;display:flex;gap:20px;align-items:flex-start;transition:border-color .3s}
-.why-card:hover{border-color:#3a3a50}
+.why-card{background:var(--card);border:1px solid var(--border);padding:36px;border-radius:3px;display:flex;gap:20px;align-items:flex-start;transition:border-color .3s}.why-card:hover{border-color:#3a3a50}
 .why-icon-wrap{width:48px;height:48px;border-radius:3px;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.why-card h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:8px}
+.why-card h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;margin-bottom:8px}
 .why-card p{font-size:14px;line-height:1.7;color:var(--fg-muted)}
 .founder-block{margin-top:60px;background:var(--card);border:1px solid var(--border);border-radius:3px;padding:48px;display:flex;gap:48px;align-items:center}
 .founder-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#1d4ed8);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:#fff;flex-shrink:0}
@@ -93,10 +73,9 @@ h1 .gold{color:var(--gold)}
 .results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);margin-top:60px}
 .result-card{background:var(--card);padding:40px 36px}
 .result-tag{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
-.result-num{font-family:'Montserrat',sans-serif;font-size:48px;font-weight:900;letter-spacing:-.04em;color:var(--fg);line-height:1}
-.result-num span{color:var(--gold)}
-.result-label{font-size:13px;color:var(--fg-muted);margin-top:8px;line-height:1.5}
-.result-card h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;margin:24px 0 10px;letter-spacing:-.01em}
+.result-num{font-family:'Montserrat',sans-serif;font-size:48px;font-weight:900;letter-spacing:-.04em;line-height:1}.result-num span{color:var(--gold)}
+.result-label{font-size:13px;color:var(--fg-muted);margin-top:8px}
+.result-card h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;margin:24px 0 10px}
 .result-card p{font-size:13px;line-height:1.7;color:var(--fg-muted)}
 #testimonials{background:var(--bg-light);padding:120px 60px}
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
@@ -113,14 +92,12 @@ h1 .gold{color:var(--gold)}
 #audit p{font-size:16px;color:var(--fg-muted);max-width:480px;margin:0 auto 36px;line-height:1.8}
 .audit-list{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:40px}
 .audit-item{display:flex;align-items:center;gap:8px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted)}
-.audit-item::before{content:'';color:var(--gold);font-size:14px}
 #contact{background:var(--bg);padding:120px 60px}
 .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.contact-info h3{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:12px}
+.contact-info h3{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;margin-bottom:12px}
 .contact-info p{font-size:15px;line-height:1.8;color:var(--fg-muted);margin-bottom:32px}
 .contact-detail{display:flex;flex-direction:column;gap:12px;margin-bottom:32px}
-.contact-detail a{color:var(--fg-muted);text-decoration:none;font-size:14px;display:flex;align-items:center;gap:10px;transition:color .2s}
-.contact-detail a:hover{color:var(--fg)}
+.contact-detail a{color:var(--fg-muted);text-decoration:none;font-size:14px;display:flex;align-items:center;gap:10px;transition:color .2s}.contact-detail a:hover{color:var(--fg)}
 .no-contract-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.25);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:8px 14px;border-radius:2px;margin-bottom:32px}
 .contact-form{display:flex;flex-direction:column;gap:14px}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -130,266 +107,52 @@ h1 .gold{color:var(--gold)}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent)}
 .form-group textarea{resize:vertical;min-height:110px}
 .form-group select option{background:#1E1E24}
-.form-submit{background:var(--gold);color:#121212;padding:16px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;border-radius:3px;transition:background .2s;margin-top:4px}
-.form-submit:hover{background:#c9a52e}
+.form-submit{background:var(--gold);color:#121212;padding:16px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;border-radius:3px;transition:background .2s;margin-top:4px}.form-submit:hover{background:#c9a52e}
 .phone-row{display:flex;gap:8px}
-.phone-code{width:110px;flex-shrink:0;background:#111118;border:1px solid var(--border);color:var(--fg);padding:13px 10px;font-size:13px;border-radius:3px;outline:none;font-family:'Open Sans',sans-serif;cursor:pointer}
-.phone-code:focus{border-color:var(--accent)}
-.phone-code option{background:#1E1E24}
-.phone-number{flex:1;background:#111118;border:1px solid var(--border);color:var(--fg);padding:13px 16px;font-size:14px;border-radius:3px;outline:none;font-family:'Open Sans',sans-serif}
-.phone-number:focus{border-color:var(--accent)}
+.phone-code{width:110px;flex-shrink:0;background:#111118;border:1px solid var(--border);color:var(--fg);padding:13px 10px;font-size:13px;border-radius:3px;outline:none;font-family:'Open Sans',sans-serif;cursor:pointer}.phone-code:focus{border-color:var(--accent)}.phone-code option{background:#1E1E24}
+.phone-number{flex:1;background:#111118;border:1px solid var(--border);color:var(--fg);padding:13px 16px;font-size:14px;border-radius:3px;outline:none;font-family:'Open Sans',sans-serif}.phone-number:focus{border-color:var(--accent)}
 section{padding:120px 60px}
 .section-label{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;font-weight:600}
 .section-title{font-family:'Montserrat',sans-serif;font-size:clamp(32px,4vw,54px);font-weight:900;letter-spacing:-.03em;line-height:1.02;text-transform:uppercase}
-.section-title em{font-style:normal;color:var(--accent)}
-.section-title .gold{color:var(--gold)}
+.section-title em{font-style:normal;color:var(--accent)}.section-title .gold{color:var(--gold)}
 footer{padding:32px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;background:var(--bg)}
-.footer-logo{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;letter-spacing:.04em}
-.footer-logo span{color:var(--accent)}
+.footer-logo{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;letter-spacing:.04em}.footer-logo span{color:var(--accent)}
 footer p{font-size:12px;color:var(--fg-muted)}
 .footer-links{display:flex;gap:24px}
-.footer-links a{font-family:'Montserrat',sans-serif;font-size:11px;color:var(--fg-muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;font-weight:600}
-.footer-links a:hover{color:var(--fg)}
+.footer-links a{font-family:'Montserrat',sans-serif;font-size:11px;color:var(--fg-muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;font-weight:600}.footer-links a:hover{color:var(--fg)}
 .marquee-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:14px 0;background:var(--bg)}
 .marquee-track{display:flex;gap:48px;white-space:nowrap;animation:marquee 28s linear infinite}
-.marquee-track span{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-muted)}
-.marquee-track .gold{color:var(--gold)}
+.marquee-track span{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-muted)}.marquee-track .gold{color:var(--gold)}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media(max-width:900px){
-  nav{padding:16px 24px}nav ul{display:none}
-  #hero,section,#forwho,#audit{padding:80px 24px}
-  h1{font-size:clamp(36px,11vw,64px)}
-  .hero-proof{flex-direction:column;max-width:100%}
-  .proof-item{border-right:none;border-bottom:1px solid var(--border)}
-  .proof-item:last-child{border-bottom:none}
-  .problem-grid,.how-steps,.results-grid,.testi-grid,.why-grid{grid-template-columns:1fr}
-  .forwho-inner{grid-template-columns:1fr}
-  .contact-wrap{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  footer{flex-direction:column;text-align:center}
-  .founder-block{flex-direction:column;padding:32px;gap:24px}
-  .phone-code{width:100px}
-}
+@media(max-width:900px){nav{padding:16px 24px}nav ul{display:none}#hero,section,#forwho,#audit{padding:80px 24px}h1{font-size:clamp(36px,11vw,64px)}.hero-proof{flex-direction:column;max-width:100%}.proof-item{border-right:none;border-bottom:1px solid var(--border)}.proof-item:last-child{border-bottom:none}.problem-grid,.how-steps,.results-grid,.testi-grid,.why-grid{grid-template-columns:1fr}.forwho-inner{grid-template-columns:1fr}.contact-wrap{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}footer{flex-direction:column;text-align:center}.founder-block{flex-direction:column;padding:32px;gap:24px}.phone-code{width:100px}}
 </style>
 </head>
 <body>
-<nav>
-  <div class="logo">EZ<span>Launch</span>Lab</div>
-  <ul>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#results">Results</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
-  </ul>
-  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView();">Free PPC Audit</button>
-</nav>
-<section id="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-badge">Amazon PPC Agency - Founded by a Seller</div>
-  <h1>Stop losing money<br>on ads that don't<br><em>convert.</em></h1>
-  <div class="hero-sub">
-    <p>You're spending on Amazon PPC but your ACoS keeps climbing and sales stay flat. <strong>EZLaunchLab fixes that.</strong> We manage your ads with full transparency - no jargon, no fluff, just results you can see every week.</p>
-  </div>
-  <div class="hero-ctas">
-    <button class="btn btn-gold" style="position:relative;z-index:10" onclick="document.getElementById('contact').scrollIntoView();">Get My Free PPC Audit</button>
-    <button class="btn btn-outline" style="position:relative;z-index:10" onclick="document.getElementById('how').scrollIntoView();">See How It Works</button>
-  </div>
-  <div class="hero-proof">
-    <div class="proof-item"><div class="proof-num">3<span>+</span></div><div class="proof-label">Years Managing Amazon PPC</div></div>
-    <div class="proof-item"><div class="proof-num"><span class="g">&#8595;</span>ACoS</div><div class="proof-label">Average Result in 60 Days</div></div>
-    <div class="proof-item"><div class="proof-num">0</div><div class="proof-label">Long-Term Contracts Required</div></div>
-    <div class="proof-item"><div class="proof-num">1<span>:1</span></div><div class="proof-label">Dedicated Strategist Per Brand</div></div>
-  </div>
-</section>
-<div class="marquee-wrap"><div class="marquee-track">
-  <span>Amazon PPC Management</span><span>-</span><span>ACoS Reduction</span><span>-</span><span class="gold">EZLaunchLab</span><span>-</span><span>Sponsored Products</span><span>-</span><span>Keyword Strategy</span><span>-</span><span>Weekly Reports</span><span>-</span><span>No Long-Term Contracts</span><span>-</span><span>Bid Optimization</span><span>-</span><span>TACoS Management</span><span>-</span>
-  <span>Amazon PPC Management</span><span>-</span><span>ACoS Reduction</span><span>-</span><span class="gold">EZLaunchLab</span><span>-</span><span>Sponsored Products</span><span>-</span><span>Keyword Strategy</span><span>-</span><span>Weekly Reports</span><span>-</span><span>No Long-Term Contracts</span><span>-</span><span>Bid Optimization</span><span>-</span><span>TACoS Management</span><span>-</span>
-</div></div>
-<div id="forwho">
-  <div class="forwho-title"><div class="section-label">Who We Work With</div><div class="section-title">Built for <em>medium sellers.</em><br>Not everyone.</div></div>
-  <div class="forwho-inner">
-    <div class="forwho-card yes">
-      <h3>EZLaunchLab is for you if...</h3>
-      <div class="forwho-list">
-        <div class="forwho-item"><div class="icon">&#10003;</div><span>You're doing $10K-$150K/month on Amazon and want to grow profitably</span></div>
-        <div class="forwho-item"><div class="icon">&#10003;</div><span>Your ACoS is too high and you're not sure why</span></div>
-        <div class="forwho-item"><div class="icon">&#10003;</div><span>You've tried managing PPC yourself - and it's eating your time</span></div>
-        <div class="forwho-item"><div class="icon">&#10003;</div><span>You feel like you're flying blind with no clear reporting</span></div>
-        <div class="forwho-item"><div class="icon">&#10003;</div><span>You want a real person managing your account, not an algorithm</span></div>
-      </div>
-    </div>
-    <div class="forwho-card no">
-      <h3>We're probably not a fit if...</h3>
-      <div class="forwho-list">
-        <div class="forwho-item"><div class="icon">&#10007;</div><span>You're just starting out with under $3K/month in revenue</span></div>
-        <div class="forwho-item"><div class="icon">&#10007;</div><span>You want guaranteed overnight results with zero effort</span></div>
-        <div class="forwho-item"><div class="icon">&#10007;</div><span>You're looking for the cheapest option in the market</span></div>
-        <div class="forwho-item"><div class="icon">&#10007;</div><span>You're not open to feedback on your listings or strategy</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-<section id="problem">
-  <div class="section-label">The Problem</div>
-  <div class="section-title">Why your Amazon ads<br>are <em>bleeding money</em></div>
-  <div class="problem-grid">
-    <div class="problem-card"><div class="problem-icon">&#128293;</div><h3>Wasted Ad Spend</h3><p>Most medium sellers waste 30-50% of their PPC budget on irrelevant keywords and poorly structured campaigns. Every wasted dollar is profit you'll never see.</p><div class="pill">We fix this first</div></div>
-    <div class="problem-card"><div class="problem-icon">&#127761;</div><h3>Zero Visibility</h3><p>Your last agency sent you a monthly PDF that raised more questions than it answered. You had no idea what was actually happening inside your account.</p><div class="pill">We report weekly</div></div>
-    <div class="problem-card"><div class="problem-icon">&#129302;</div><h3>Set &amp; Forget Management</h3><p>Big agencies dump you with a junior who manages 40 accounts. Nobody is watching your bids, catching wasted spend, or adapting your strategy in real time.</p><div class="pill">You get 1 dedicated strategist</div></div>
-  </div>
-</section>
-<section id="how">
-  <div class="section-label">Our Process</div>
-  <div class="section-title">Simple. Transparent.<br><em>No BS.</em></div>
-  <div class="how-steps">
-    <div class="how-step"><div class="step-num">01</div><h3>Free PPC Audit</h3><p>We dig into your account and show you exactly where your budget is being wasted - before you spend a single dollar with us. No obligation.</p></div>
-    <div class="how-step"><div class="step-num">02</div><h3>Custom Strategy</h3><p>Your dedicated strategist builds a campaign structure tailored to your products, margins, and goals - not a copy-paste template.</p></div>
-    <div class="how-step"><div class="step-num">03</div><h3>Launch &amp; Optimize</h3><p>We go live and optimize daily. Bids, keywords, negatives, placements - all monitored and adjusted so your ACoS drops and profit grows.</p></div>
-    <div class="how-step"><div class="step-num">04</div><h3>Weekly Reports</h3><p>Every week you get a plain-English report showing exactly what we did, what changed, and what's next. You're always in the loop.</p></div>
-  </div>
-</section>
-<section id="why">
-  <div class="section-label">Why EZLaunchLab</div>
-  <div class="section-title">We do things<br>differently - <span class="gold">here's how</span></div>
-  <div class="why-grid">
-    <div class="why-card"><div class="why-icon-wrap">&#128202;</div><div><h3>Full Transparency, Always</h3><p>No black-box reporting. You see every keyword, every bid change, every decision we make - explained in plain English, every single week.</p></div></div>
-    <div class="why-card"><div class="why-icon-wrap">&#127919;</div><div><h3>Dedicated Strategist</h3><p>You get one senior strategist who knows your brand, your margins, and your goals. Not a rotating junior team managing 80 accounts at once.</p></div></div>
-    <div class="why-card"><div class="why-icon-wrap">&#128275;</div><div><h3>No Long-Term Contracts</h3><p>We earn your business every month. Cancel anytime with 30 days notice. We're confident in our results - you shouldn't have to be locked in to stay.</p></div></div>
-    <div class="why-card"><div class="why-icon-wrap">&#127381;</div><div><h3>Free Audit Before You Commit</h3><p>We show you the gaps in your current PPC setup before you pay us a cent. You walk away with actionable insights whether you hire us or not.</p></div></div>
-  </div>
-  <div class="founder-block">
-    <div class="founder-avatar">EZ</div>
-    <div class="founder-text">
-      <h3>Founded by an Amazon seller - not a marketing exec.</h3>
-      <p>We built EZLaunchLab because we lived the frustration firsthand. Wasted ad spend, agencies that went dark, reports that said nothing. We know what it feels like to watch your ACoS climb and not know why. That's exactly why we do things differently.</p>
-      <div class="tag">Founded by a seller - 3 years experience</div>
-    </div>
-  </div>
-</section>
-<section id="results">
-  <div class="section-label">Case Studies</div>
-  <div class="section-title">Real results for<br><em>real sellers</em></div>
-  <div class="results-grid">
-    <div class="result-card"><div class="result-tag">Home &amp; Kitchen - Sponsored Products</div><div class="result-num"><span>&#8595;</span>38%</div><div class="result-label">ACoS reduction in 45 days</div><h3>From bleeding to profitable</h3><p>A home goods seller came to us with a 54% ACoS and no clear campaign structure. We rebuilt their campaigns from scratch, cut irrelevant spend, and brought ACoS down to 16% - without touching their ad budget.</p></div>
-    <div class="result-card"><div class="result-tag">Health &amp; Beauty - Full Account</div><div class="result-num"><span>x</span>2.4</div><div class="result-label">Revenue growth in 90 days</div><h3>Scaling without overspending</h3><p>A beauty brand was stuck at $18K/month. We restructured their keyword strategy, added Sponsored Brands, and scaled them to $43K/month while keeping TACoS under 12%.</p></div>
-    <div class="result-card"><div class="result-tag">Sports &amp; Outdoors - PPC Rescue</div><div class="result-num"><span>$</span>11K</div><div class="result-label">Monthly wasted spend recovered</div><h3>Budget rescue &amp; rebuild</h3><p>An outdoors brand was hemorrhaging $11K/month on auto campaigns targeting completely irrelevant search terms. Our audit found it in week one. Fixed in week two.</p></div>
-  </div>
-</section>
-<section id="testimonials" style="background:var(--bg-light);padding:120px 60px">
-  <div class="section-label" style="color:var(--accent)">Testimonials</div>
-  <div class="section-title" style="color:#111">Sellers who stopped<br><em style="color:var(--accent)">wasting money</em></div>
-  <div class="testi-grid">
-    <div class="testi-card"><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-text">"Finally an agency that actually shows me what's happening. I get a weekly report I can understand, and my ACoS dropped from 48% to 19% in two months. Game changer."</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#2563EB,#1d4ed8)">J</div><div><div class="testi-name">James R.</div><div class="testi-role">Home &amp; Kitchen Seller - $40K/mo</div></div></div></div>
-    <div class="testi-card"><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-text">"I was skeptical because I'd been burned by two agencies before. EZLaunchLab actually showed me where my money was going in the free audit. Hired them that same week."</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#166534,#15803d)">S</div><div><div class="testi-name">Sarah M.</div><div class="testi-role">Health &amp; Beauty Seller - $55K/mo</div></div></div></div>
-    <div class="testi-card"><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-text">"The no long-term contract policy sold me. Six months later I'm still here because the results speak for themselves. Profit is up, stress is down. Couldn't ask for more."</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#92400e,#D4AF37)">M</div><div><div class="testi-name">Mike T.</div><div class="testi-role">Sports &amp; Outdoors Seller - $30K/mo</div></div></div></div>
-  </div>
-</section>
-<section id="audit">
-  <div class="audit-glow"></div>
-  <div class="section-label">Free PPC Audit</div>
-  <div class="section-title">Find out where your<br>budget is going - <span class="gold">for free</span></div>
-  <p>We'll audit your Amazon PPC account and show you exactly what's working, what's wasting money, and what to fix first. No strings attached.</p>
-  <div class="audit-list">
-    <div class="audit-item">Takes 30 minutes</div>
-    <div class="audit-item">No obligation</div>
-    <div class="audit-item">Real insights, not a sales pitch</div>
-    <div class="audit-item">Cancel anytime after</div>
-  </div>
-  <a href="https://cal.com/easy-lauch-jqk5yn" target="_blank" class="btn btn-gold" style="font-size:14px;padding:18px 36px">Book My Free Audit</a>
-</section>
-<section id="contact">
-  <div class="section-label">Get Started</div>
-  <div class="section-title">Let's look at<br>your account <em>together</em></div>
-  <div class="contact-wrap">
-    <div class="contact-info">
-      <h3>Book your free PPC audit</h3>
-      <p>Tell us a bit about your brand and we'll be in touch within 24 hours to schedule your free audit call. No long-term commitment required.</p>
-      <div class="no-contract-badge">No long-term contracts - Cancel anytime</div>
-      <div class="contact-detail">
-        <a href="/cdn-cgi/l/email-protection#f0959183899c918593989c9192b0979d91999cde939f9d"><span class="__cf_email__" data-cfemail="086d697b7164697d6b6064696a486f65696164266b6765">[email&#160;protected]</span></a>
-        <a href="#">Response within a few hours</a>
-      </div>
-      <div style="display:flex;gap:10px;margin-top:8px">
-        <a href="https://www.instagram.com/ezlaunchlab/" target="_blank" style="width:44px;height:44px;border:1px solid #555;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </a>
-      </div>
-    </div>
-    <form class="contact-form" action="https://formspree.io/f/xaqlkejr" method="POST" onsubmit="return ezSubmit()">
-      <div class="form-row">
-        <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Jane Smith" required></div>
-        <div class="form-group"><label>Brand Name</label><input type="text" name="brand" placeholder="Your Amazon Brand" required></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@brand.com" required></div>
-        <div class="form-group">
-          <label>Phone Number</label>
-          <div class="phone-row">
-            <select class="phone-code" id="ezpc">
-              <option value="+1" selected>US +1</option>
-              <option value="+44">UK +44</option>
-              <option value="+61">AU +61</option>
-              <option value="+49">DE +49</option>
-              <option value="+33">FR +33</option>
-              <option value="+48">PL +48</option>
-              <option value="+380">UA +380</option>
-              <option value="+91">IN +91</option>
-              <option value="+55">BR +55</option>
-              <option value="+971">AE +971</option>
-              <option value="+234">NG +234</option>
-            </select>
-            <input class="phone-number" type="tel" name="phone" placeholder="555 123-4567">
-          </div>
-        </div>
-      </div>
-      <div class="form-group"><label>Monthly Revenue</label>
-        <select name="revenue"><option value="">Select range</option><option>$10K - $30K / month</option><option>$30K - $70K / month</option><option>$70K - $150K / month</option><option>$150K+ / month</option></select>
-      </div>
-      <div class="form-group"><label>Current ACoS (if known)</label><input type="text" name="acos" placeholder="e.g. 35% - or I don't know yet"></div>
-      <div class="form-group"><label>Biggest PPC challenge right now</label><textarea name="challenge" placeholder="Tell us what's frustrating you most about your Amazon ads..."></textarea></div>
-      <input type="hidden" name="_next" value="https://cal.com/easy-lauch-jqk5yn">
-      <input type="hidden" name="_subject" value="New PPC Audit Request - EZLaunchLab">
-      <button type="submit" class="form-submit">Book My Free Audit</button>
-    </form>
-  </div>
-</section>
-<footer>
-  <div class="footer-logo">EZ<span>Launch</span>Lab</div>
-  <p>2025 EZLaunchLab. Amazon PPC Agency. All rights reserved.</p>
-  <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
-</footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function ezSubmit(){
-  var f=document.querySelector('.contact-form');
-  var btn=f.querySelector('.form-submit');
-  btn.textContent='Submitting...';btn.style.background='#166534';btn.style.color='#fff';
-  var fd={
-    name:f.querySelector('[name=name]').value,
-    brand:f.querySelector('[name=brand]').value,
-    email:f.querySelector('[name=email]').value,
-    phone:(document.getElementById('ezpc').value||'')+' '+(f.querySelector('[name=phone]').value||''),
-    revenue:f.querySelector('[name=revenue]').value,
-    acos:f.querySelector('[name=acos]').value,
-    challenge:f.querySelector('[name=challenge]').value,
-    added_to_crm:false
-  };
-  var k='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1reGJqY2xqbGpteWdydW9vZHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NTg5NTgsImV4cCI6MjA5MTMzNDk1OH0.-s7YhaLGv99e_YvJ_bEh_7n4BlaNBF0nPFH5D-UHA9A';
-  fetch('https://mkxbjcljljmygruoodvv.supabase.co/rest/v1/leads',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','apikey':k,'Authorization':'Bearer '+k,'Prefer':'return=minimal'},
-    body:JSON.stringify(fd)
-  }).then(function(){
-    f.removeAttribute('onsubmit');
-    f.submit();
-  }).catch(function(){
-    f.removeAttribute('onsubmit');
-    f.submit();
-  });
-  return false;
-}
-var obs=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}});
-},{threshold:.08});
-document.querySelectorAll('.problem-card,.how
+<nav><div class="logo">EZ<span>Launch</span>Lab</div><ul><li><a href="#why">Why Us</a></li><li><a href="#how">How It Works</a></li><li><a href="#results">Results</a></li><li><a href="#testimonials">Reviews</a></li></ul><button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView()">Free PPC Audit</button></nav>
+<section id="hero"><div class="hero-grid"></div><div class="hero-glow"></div><div class="hero-glow2"></div><div class="hero-badge">Amazon PPC Agency - Founded by a Seller</div><h1>Stop losing money<br>on ads that don't<br><em>convert.</em></h1><div class="hero-sub"><p>You're spending on Amazon PPC but your ACoS keeps climbing and sales stay flat. <strong>EZLaunchLab fixes that.</strong> We manage your ads with full transparency - no jargon, no fluff, just results you can see every week.</p></div><div class="hero-ctas"><button class="btn btn-gold" style="position:relative;z-index:10" onclick="document.getElementById('contact').scrollIntoView()">Get My Free PPC Audit</button><button class="btn btn-outline" style="position:relative;z-index:10" onclick="document.getElementById('how').scrollIntoView()">See How It Works</button></div><div class="hero-proof"><div class="proof-item"><div class="proof-num">3<span>+</span></div><div class="proof-label">Years Managing Amazon PPC</div></div><div class="proof-item"><div class="proof-num"><span class="g">&#8595;</span>ACoS</div><div class="proof-label">Average Result in 60 Days</div></div><div class="proof-item"><div class="proof-num">0</div><div class="proof-label">Long-Term Contracts Required</div></div><div class="proof-item"><div class="proof-num">1<span>:1</span></div><div class="proof-label">Dedicated Strategist Per Brand</div></div></div></section>
+<div class="marquee-wrap"><div class="marquee-track"><span>Amazon PPC Management</span><span>-</span><span>ACoS Reduction</span><span>-</span><span class="gold">EZLaunchLab</span><span>-</span><span>Sponsored Products</span><span>-</span><span>Keyword Strategy</span><span>-</span><span>Weekly Reports</span><span>-</span><span>No Long-Term Contracts</span><span>-</span><span>Bid Optimization</span><span>-</span><span>TACoS Management</span><span>-</span><span>Amazon PPC Management</span><span>-</span><span>ACoS Reduction</span><span>-</span><span class="gold">EZLaunchLab</span><span>-</span><span>Sponsored Products</span><span>-</span><span>Keyword Strategy</span><span>-</span><span>Weekly Reports</span><span>-</span><span>No Long-Term Contracts</span><span>-</span><span>Bid Optimization</span><span>-</span><span>TACoS Management</span><span>-</span></div></div>
+<div id="forwho"><div class="forwho-title"><div class="section-label">Who We Work With</div><div class="section-title">Built for <em>medium sellers.</em><br>Not everyone.</div></div><div class="forwho-inner"><div class="forwho-card yes"><h3>EZLaunchLab is for you if...</h3><div class="forwho-list"><div class="forwho-item"><div class="icon">&#10003;</div><span>You're doing $10K-$150K/month on Amazon and want to grow profitably</span></div><div class="forwho-item"><div class="icon">&#10003;</div><span>Your ACoS is too high and you're not sure why</span></div><div class="forwho-item"><div class="icon">&#10003;</div><span>You've tried managing PPC yourself - and it's eating your time</span></div><div class="forwho-item"><div class="icon">&#10003;</div><span>You feel like you're flying blind with no clear reporting</span></div><div class="forwho-item"><div class="icon">&#10003;</div><span>You want a real person managing your account, not an algorithm</span></div></div></div><div class="forwho-card no"><h3>We're probably not a fit if...</h3><div class="forwho-list"><div class="forwho-item"><div class="icon">&#10007;</div><span>You're just starting out with under $3K/month in revenue</span></div><div class="forwho-item"><div class="icon">&#10007;</div><span>You want guaranteed overnight results with zero effort</span></div><div class="forwho-item"><div class="icon">&#10007;</div><span>You're looking for the cheapest option in the market</span></div><div class="forwho-item"><div class="icon">&#10007;</div><span>You're not open to feedback on your listings or strategy</span></div></div></div></div></div>
+<section id="problem"><div class="section-label">The Problem</div><div class="section-title">Why your Amazon ads<br>are <em>bleeding money</em></div><div class="problem-grid"><div class="problem-card"><div class="problem-icon">&#128293;</div><h3>Wasted Ad Spend</h3><p>Most medium sellers waste 30-50% of their PPC budget on irrelevant keywords and poorly structured campaigns.</p><div class="pill">We fix this first</div></div><div class="problem-card"><div class="problem-icon">&#127761;</div><h3>Zero Visibility</h3><p>Your last agency sent you a monthly PDF that raised more questions than it answered.</p><div class="pill">We report weekly</div></div><div class="problem-card"><div class="problem-icon">&#129302;</div><h3>Set and Forget Management</h3><p>Big agencies dump you with a junior who manages 40 accounts. Nobody is watching your bids.</p><div class="pill">You get 1 dedicated strategist</div></div></div></section>
+<section id="how"><div class="section-label">Our Process</div><div class="section-title">Simple. Transparent.<br><em>No BS.</em></div><div class="how-steps"><div class="how-step"><div class="step-num">01</div><h3>Free PPC Audit</h3><p>We dig into your account and show you exactly where your budget is being wasted.</p></div><div class="how-step"><div class="step-num">02</div><h3>Custom Strategy</h3><p>Your dedicated strategist builds a campaign structure tailored to your products and goals.</p></div><div class="how-step"><div class="step-num">03</div><h3>Launch and Optimize</h3><p>We go live and optimize daily. Bids, keywords, negatives, placements - all monitored.</p></div><div class="how-step"><div class="step-num">04</div><h3>Weekly Reports</h3><p>Every week you get a plain-English report showing exactly what we did and what changed.</p></div></div></section>
+<section id="why"><div class="section-label">Why EZLaunchLab</div><div class="section-title">We do things<br>differently - <span class="gold">here's how</span></div><div class="why-grid"><div class="why-card"><div class="why-icon-wrap">&#128202;</div><div><h3>Full Transparency, Always</h3><p>No black-box reporting. You see every keyword, every bid change, every decision we make.</p></div></div><div class="why-card"><div class="why-icon-wrap">&#127919;</div><div><h3>Dedicated Strategist</h3><p>You get one senior strategist who knows your brand, your margins, and your goals.</p></div></div><div class="why-card"><div class="why-icon-wrap">&#128275;</div><div><h3>No Long-Term Contracts</h3><p>We earn your business every month. Cancel anytime with 30 days notice.</p></div></div><div class="why-card"><div class="why-icon-wrap">&#127381;</div><div><h3>Free Audit Before You Commit</h3><p>We show you the gaps in your current PPC setup before you pay us a cent.</p></div></div></div><div class="founder-block"><div class="founder-avatar">EZ</div><div class="founder-text"><h3>Founded by an Amazon seller - not a marketing exec.</h3><p>We built EZLaunchLab because we lived the frustration firsthand. Wasted ad spend, agencies that went dark, reports that said nothing.</p><div class="tag">Founded by a seller - 3 years experience</div></div></div></section>
+<section id="results"><div class="section-label">Case Studies</div><div class="section-title">Real results for<br><em>real sellers</em></div><div class="results-grid"><div class="result-card"><div class="result-tag">Home and Kitchen</div><div class="result-num"><span>&#8595;</span>38%</div><div class="result-label">ACoS reduction in 45 days</div><h3>From bleeding to profitable</h3><p>A home goods seller came to us with a 54% ACoS. We rebuilt campaigns and brought ACoS down to 16%.</p></div><div class="result-card"><div class="result-tag">Health and Beauty</div><div class="result-num"><span>x</span>2.4</div><div class="result-label">Revenue growth in 90 days</div><h3>Scaling without overspending</h3><p>A beauty brand was stuck at $18K/month. We scaled them to $43K/month while keeping TACoS under 12%.</p></div><div class="result-card"><div class="result-tag">Sports and Outdoors</div><div class="result-num"><span>$</span>11K</div><div class="result-label">Monthly wasted spend recovered</div><h3>Budget rescue and rebuild</h3><p>An outdoors brand was hemorrhaging $11K/month on auto campaigns targeting irrelevant search terms.</p></div></div></section>
+<section id="testimonials"><div class="section-label" style="color:var(--accent)">Testimonials</div><div class="section-title" style="color:#111">Sellers who stopped<br><em style="color:var(--accent)">wasting money</em></div><div class="testi-grid"><div class="testi-card"><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-text">"Finally an agency that actually shows me what's happening. My ACoS dropped from 48% to 19% in two months."</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#2563EB,#1d4ed8)">J</div><div><div class="testi-name">James R.</div><div class="testi-role">Home and Kitchen Seller - $40K/mo</div></div></div></div><div class="testi-card"><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-text">"I was skeptical because I'd been burned by two agencies before. EZLaunchLab showed me where my money was going."</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#166534,#15803d)">S</div><div><div class="testi-name">Sarah M.</div><div class="testi-role">Health and Beauty Seller - $55K/mo</div></div></div></div><div class="testi-card"><div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testi-text">"The no long-term contract policy sold me. Six months later I'm still here because the results speak for themselves."</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#92400e,#D4AF37)">M</div><div><div class="testi-name">Mike T.</div><div class="testi-role">Sports and Outdoors Seller - $30K/mo</div></div></div></div></div></section>
+<section id="audit"><div class="audit-glow"></div><div class="section-label">Free PPC Audit</div><div class="section-title">Find out where your<br>budget is going - <span class="gold">for free</span></div><p>We'll audit your Amazon PPC account and show you exactly what's working and what to fix first.</p><div class="audit-list"><div class="audit-item">Takes 30 minutes</div><div class="audit-item">No obligation</div><div class="audit-item">Real insights</div><div class="audit-item">Cancel anytime</div></div><a href="https://cal.com/easy-lauch-jqk5yn" target="_blank" class="btn btn-gold" style="font-size:14px;padding:18px 36px">Book My Free Audit</a></section>
+<section id="contact"><div class="section-label">Get Started</div><div class="section-title">Let's look at<br>your account <em>together</em></div><div class="contact-wrap"><div class="contact-info"><h3>Book your free PPC audit</h3><p>Tell us a bit about your brand and we'll be in touch within 24 hours to schedule your free audit call.</p><div class="no-contract-badge">No long-term contracts - Cancel anytime</div><div class="contact-detail"><a href="mailto:easylauchlab@gmail.com">easylauchlab@gmail.com</a><a href="#">Response within a few hours</a></div><div style="display:flex;gap:10px;margin-top:8px"><a href="https://www.instagram.com/ezlaunchlab/" target="_blank" style="width:44px;height:44px;border:1px solid #555;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a></div></div>
+<form class="contact-form" action="https://formspree.io/f/xaqlkejr" method="POST" onsubmit="return ezSubmit()">
+<div class="form-row"><div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Jane Smith" required></div><div class="form-group"><label>Brand Name</label><input type="text" name="brand" placeholder="Your Amazon Brand" required></div></div>
+<div class="form-row"><div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@brand.com" required></div><div class="form-group"><label>Phone Number</label><div class="phone-row"><select class="phone-code" id="ezpc"><option value="+1" selected>US +1</option><option value="+44">UK +44</option><option value="+61">AU +61</option><option value="+49">DE +49</option><option value="+33">FR +33</option><option value="+48">PL +48</option><option value="+380">UA +380</option><option value="+91">IN +91</option><option value="+55">BR +55</option><option value="+971">AE +971</option><option value="+234">NG +234</option></select><input class="phone-number" type="tel" name="phone" placeholder="555 123-4567"></div></div></div>
+<div class="form-group"><label>Monthly Revenue</label><select name="revenue"><option value="">Select range</option><option>$10K - $30K / month</option><option>$30K - $70K / month</option><option>$70K - $150K / month</option><option>$150K+ / month</option></select></div>
+<div class="form-group"><label>Current ACoS (if known)</label><input type="text" name="acos" placeholder="e.g. 35% - or I don't know yet"></div>
+<div class="form-group"><label>Biggest PPC challenge right now</label><textarea name="challenge" placeholder="Tell us what's frustrating you most about your Amazon ads..."></textarea></div>
+<input type="hidden" name="_next" value="https://cal.com/easy-lauch-jqk5yn">
+<input type="hidden" name="_subject" value="New PPC Audit Request - EZLaunchLab">
+<button type="submit" class="form-submit">Book My Free Audit</button>
+</form></div></section>
+<footer><div class="footer-logo">EZ<span>Launch</span>Lab</div><p>2025 EZLaunchLab. Amazon PPC Agency. All rights reserved.</p><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div></footer>
+<script>
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})},{threshold:.08});
+document.querySelectorAll('.problem-card,.how-step,.why-card,.result-card,.testi-card,.forwho-card,.proof-item').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity .5s,transform .5s';obs.observe(el)});
+</script>
+</body>
+</html>
