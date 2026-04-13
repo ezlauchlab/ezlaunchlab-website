@@ -25,12 +25,11 @@ function ezSubmit(){
     headers:{'Content-Type':'application/json','apikey':k,'Authorization':'Bearer '+k,'Prefer':'return=minimal'},
     body:JSON.stringify(fd)
   }).then(function(){
-    window.open('https://cal.com/easy-lauch-jqk5yn','_blank');
-    btn.textContent='✓ Booked! See you on the call.';
+    btn.textContent='✓ Request received! We\'ll be in touch soon.';
     setTimeout(function(){btn.textContent='Book My Free Audit →';btn.style.background='';btn.style.color='';f.reset();},3500);
   }).catch(function(){
-    window.open('https://cal.com/easy-lauch-jqk5yn','_blank');
-    btn.textContent='Book My Free Audit →';btn.style.background='';btn.style.color='';
+    btn.textContent='✓ Request received! We\'ll be in touch soon.';
+    setTimeout(function(){btn.textContent='Book My Free Audit →';btn.style.background='';btn.style.color='';},3500);
   });
   return false;
 }
