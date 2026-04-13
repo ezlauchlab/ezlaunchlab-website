@@ -3,422 +3,480 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EZLaunchLab CRM</title>
+<title>EZLaunchLab - Amazon PPC Agency</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+function ezSubmit(){var f=document.querySelector('.contact-form');var btn=f.querySelector('.form-submit');btn.textContent='Submitting...';btn.style.background='#166534';btn.style.color='#fff';var fd={name:f.querySelector('[name=name]').value,brand:f.querySelector('[name=brand]').value,email:f.querySelector('[name=email]').value,phone:(document.getElementById('ezpc').value||'')+' '+(f.querySelector('[name=phone]').value||''),revenue:f.querySelector('[name=revenue]').value,acos:f.querySelector('[name=acos]').value,challenge:f.querySelector('[name=challenge]').value};var k='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1reGJqY2xqbGpteWdydW9vZHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NTg5NTgsImV4cCI6MjA5MTMzNDk1OH0.-s7YhaLGv99e_YvJ_bEh_7n4BlaNBF0nPFH5D-UHA9A';fetch('https://mkxbjcljljmygruoodvv.supabase.co/rest/v1/leads',{method:'POST',headers:{'Content-Type':'application/json','apikey':k,'Authorization':'Bearer '+k,'Prefer':'return=minimal'},body:JSON.stringify(fd)}).then(function(){f.removeAttribute('onsubmit');f.submit()}).catch(function(){f.removeAttribute('onsubmit');f.submit()});return false}
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0f;--bg2:#12121a;--fg:#f0f0f5;--fg-muted:#8e8e9a;--accent:#2563EB;--gold:#D4AF37;--border:rgba(255,255,255,.06);--card:rgba(255,255,255,.04);--glass:rgba(255,255,255,.03);--glow:0 0 0 1px rgba(255,255,255,.06),0 2px 12px rgba(0,0,0,.3)}
-body{background:var(--bg);color:var(--fg);font-family:'Open Sans',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4,.logo{font-family:'Montserrat',sans-serif}
-button{font-family:'Montserrat',sans-serif;cursor:pointer}
-input,select,textarea{font-family:'Open Sans',sans-serif}
-.hide{display:none!important}
+:root{
+  --bg:#0a0a0f;
+  --bg2:#111118;
+  --bg3:#16161f;
+  --fg:#f0f0f5;
+  --fg-muted:#8e8ea0;
+  --accent:#2563EB;
+  --accent-hover:#1d4ed8;
+  --accent-glow:rgba(37,99,235,.25);
+  --gold:#D4AF37;
+  --gold-glow:rgba(212,175,55,.2);
+  --border:rgba(255,255,255,.07);
+  --border-hover:rgba(255,255,255,.14);
+  --card:rgba(255,255,255,.04);
+  --card-hover:rgba(255,255,255,.07);
+  --radius:20px;
+  --radius-sm:12px;
+  --radius-xs:8px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:'Open Sans',sans-serif;overflow-x:hidden}
+h1,h2,h3,.logo,.btn,.section-title,.nav-cta{font-family:'Montserrat',sans-serif}
 
-.lw{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(145deg,#0a0a12,#10101a 50%,#0d0d18)}
-.lb{background:rgba(22,22,32,.85);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:48px 40px;width:400px;max-width:92vw;box-shadow:0 24px 80px rgba(0,0,0,.5)}
-.lr{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:10px}
-.li{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;color:var(--fg)}.li span{color:var(--accent)}
-.lsub{text-align:center;color:var(--fg-muted);font-size:14px;margin:6px 0 32px}
-.fld{margin-bottom:18px}
-.lbl{display:block;font-family:'Montserrat',sans-serif;font-size:10px;color:var(--fg-muted);font-weight:700;text-transform:uppercase;letter-spacing:.18em;margin-bottom:6px}
-.inp{width:100%;padding:13px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--fg);font-size:14px;outline:none;transition:all .2s}
-.inp:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
-.pww{position:relative}
-.pwt{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--fg-muted);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.bl{width:100%;padding:15px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--gold),#c9a52e);color:#121212;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-top:8px;transition:all .25s;box-shadow:0 4px 16px rgba(212,175,55,.2)}.bl:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(212,175,55,.3)}
-.eb{background:rgba(239,68,68,.06);color:#ef4444;padding:12px 16px;border-radius:12px;font-size:13px;border:1px solid rgba(239,68,68,.12);margin-bottom:14px}
+/* NAV — frosted glass iOS style */
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;width:calc(100% - 48px);max-width:1100px;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(15,15,22,.72);border:1px solid var(--border);border-radius:100px;transition:all .3s}
+.logo{font-size:18px;font-weight:900;letter-spacing:.02em;color:var(--fg)}.logo span{color:var(--accent)}
+nav ul{display:flex;gap:8px;list-style:none}
+nav ul a{color:var(--fg-muted);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;transition:color .2s;padding:8px 14px;border-radius:100px}
+nav ul a:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+.nav-cta{background:var(--gold);color:#0a0a0f;padding:10px 20px;border-radius:100px;font-size:12px;font-weight:800;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;font-family:'Montserrat',sans-serif;border:none;cursor:pointer;box-shadow:0 0 20px var(--gold-glow)}.nav-cta:hover{background:#c9a52e;box-shadow:0 0 30px var(--gold-glow)}
 
-.d{padding:28px 40px}
-.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
-.hl{display:flex;align-items:center;gap:14px}
-.hlogo{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900}.hlogo span{color:var(--accent)}
-.hsub{font-size:10px;color:var(--fg-muted);letter-spacing:.15em;text-transform:uppercase;font-family:'Montserrat',sans-serif;font-weight:600}
-.bo{padding:9px 18px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--fg-muted);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:all .2s;backdrop-filter:blur(10px)}.bo:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12)}
-.ubadge{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:6px}
-.ubadge-admin{background:rgba(212,175,55,.1);color:var(--gold);border:1px solid rgba(212,175,55,.15)}
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:160px 60px 100px;position:relative;overflow:hidden;background:var(--bg)}
+.hero-orb1{position:absolute;top:-200px;right:-100px;width:700px;height:700px;background:radial-gradient(circle,rgba(37,99,235,.18) 0%,transparent 65%);pointer-events:none;animation:float 8s ease-in-out infinite}
+.hero-orb2{position:absolute;bottom:-200px;left:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(212,175,55,.1) 0%,transparent 65%);pointer-events:none;animation:float 10s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
 
-.sec{background:rgba(37,99,235,.04);border:1px solid rgba(37,99,235,.1);border-radius:12px;padding:12px 18px;margin-bottom:20px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px;backdrop-filter:blur(10px)}
+/* MOTION */
+.word{display:inline-block;opacity:0;transform:translateY(40px);animation:wordIn .6s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes wordIn{to{opacity:1;transform:translateY(0)}}
+.hero-badge{opacity:0;animation:fadeUp .5s cubic-bezier(.16,1,.3,1) .1s forwards}
+.hero-sub{opacity:0;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) .9s forwards}
+.hero-ctas{opacity:0;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) 1.1s forwards}
+.hero-proof{opacity:0;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) 1.3s forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
-.tabs{display:flex;gap:4px;margin-bottom:24px;background:rgba(255,255,255,.04);border-radius:12px;padding:4px;width:fit-content;backdrop-filter:blur(10px)}
-.tab{padding:9px 20px;border:none;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--fg-muted);position:relative;border-radius:9px;transition:all .2s}
-.tab.on{color:#fff;background:var(--accent);box-shadow:0 2px 8px rgba(37,99,235,.3)}
-.tab .dot{position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 6px rgba(212,175,55,.4)}
+/* TYPEWRITER */
+.typewriter{display:inline-block;border-right:3px solid var(--accent);white-space:nowrap;overflow:hidden;width:0;animation:typing 1.8s steps(30,end) 1.5s forwards,blink .8s step-end infinite}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink{0%,100%{border-color:var(--accent)}50%{border-color:transparent}}
 
-.sts{display:flex;gap:10px;margin-bottom:24px}
-.st{background:rgba(255,255,255,.03);backdrop-filter:blur(10px);padding:20px 24px;flex:1;border-radius:16px;border:1px solid rgba(255,255,255,.06);transition:border-color .2s}
-.st:hover{border-color:rgba(255,255,255,.1)}
-.stl{font-family:'Montserrat',sans-serif;font-size:10px;color:var(--fg-muted);text-transform:uppercase;letter-spacing:.15em;font-weight:700}
-.stv{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;margin-top:6px;letter-spacing:-.03em}
+/* 3D TILT */
+.tilt{transform-style:preserve-3d;transition:transform .15s ease,box-shadow .15s ease}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.25);color:var(--accent);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;width:fit-content}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+h1{font-size:clamp(44px,6.5vw,100px);font-weight:900;line-height:.93;letter-spacing:-.04em;text-transform:uppercase;position:relative;z-index:1;max-width:860px}
+h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{margin-top:32px;max-width:500px;position:relative;z-index:1}
+.hero-sub p{font-size:17px;line-height:1.85;color:var(--fg-muted)}
+.hero-sub p strong{color:var(--fg);font-weight:600}
+.hero-ctas{display:flex;gap:12px;margin-top:40px;flex-wrap:wrap;position:relative;z-index:10}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 28px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-radius:100px;transition:all .25s;cursor:pointer;border:none;font-family:'Montserrat',sans-serif}
+.btn-gold{background:var(--gold);color:#0a0a0f;box-shadow:0 0 30px var(--gold-glow)}.btn-gold:hover{background:#c9a52e;box-shadow:0 0 40px var(--gold-glow);transform:translateY(-1px)}
+.btn-outline{background:rgba(255,255,255,.06);color:var(--fg);border:1px solid var(--border);backdrop-filter:blur(10px)}.btn-outline:hover{background:rgba(255,255,255,.1);border-color:var(--border-hover)}
+.hero-proof{margin-top:64px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:680px;position:relative;z-index:1}
+.proof-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;backdrop-filter:blur(10px);transition:all .3s}
+.proof-item:hover{background:var(--card-hover);border-color:var(--border-hover);transform:translateY(-2px)}
+.proof-num{font-family:'Montserrat',sans-serif;font-size:26px;font-weight:900;color:var(--fg)}.proof-num span{color:var(--accent)}.proof-num .g{color:var(--gold)}
+.proof-label{font-size:10px;color:var(--fg-muted);margin-top:4px;line-height:1.4}
 
-.tb{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
-.tb .inp{width:220px;padding:10px 16px;font-size:13px;border-radius:12px;background:rgba(255,255,255,.04)}
-.tb select{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--fg);font-size:13px;font-family:'Open Sans',sans-serif}
-.tbr{margin-left:auto;display:flex;gap:4px;background:rgba(255,255,255,.04);border-radius:10px;padding:3px}
-.bv{padding:7px 16px;border-radius:8px;border:none;background:transparent;color:var(--fg-muted);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
-.bv.on{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.25)}
-.ba{padding:8px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--gold),#c9a52e);color:#121212;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 2px 10px rgba(212,175,55,.2);transition:all .2s}.ba:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(212,175,55,.3)}
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;padding:20px 0;background:transparent;margin:0 0 0 0}
+.marquee-track{display:flex;gap:40px;white-space:nowrap;animation:marquee 28s linear infinite}
+.marquee-track span{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2)}.marquee-track .gold{color:rgba(212,175,55,.5)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-.tw{background:rgba(255,255,255,.03);border-radius:16px;overflow-x:auto;border:1px solid rgba(255,255,255,.06);backdrop-filter:blur(10px)}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;padding:14px 18px;font-family:'Montserrat',sans-serif;font-size:10px;color:var(--fg-muted);text-transform:uppercase;letter-spacing:.15em;font-weight:700;border-bottom:1px solid rgba(255,255,255,.06)}
-td{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.04)}
-tr.cl{cursor:pointer;transition:background .2s}tr.cl:hover{background:rgba(37,99,235,.04)}
-.bdg{font-family:'Montserrat',sans-serif;padding:5px 12px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+/* SECTIONS */
+section{padding:120px 60px}
+.section-label{font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;font-weight:700}
+.section-title{font-family:'Montserrat',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:900;letter-spacing:-.03em;line-height:1.04;text-transform:uppercase}
+.section-title em{font-style:normal;color:var(--accent)}.section-title .gold{color:var(--gold)}
 
-.pp{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
-.pc{flex:1;min-width:180px;background:rgba(255,255,255,.03);padding:16px;border-top:3px solid var(--accent);border-radius:16px;border:1px solid rgba(255,255,255,.06)}
-.pk{background:rgba(255,255,255,.03);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,.06);margin-bottom:8px;cursor:pointer;transition:all .2s}.pk:hover{border-color:rgba(37,99,235,.3);background:rgba(37,99,235,.04)}
+/* FOR WHO */
+#forwho{background:var(--bg);padding:80px 60px}
+.forwho-inner{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1000px;margin:40px auto 0}
+.forwho-card{background:var(--card);border:1px solid var(--border);padding:40px;border-radius:var(--radius);backdrop-filter:blur(10px);transition:all .3s}
+.forwho-card.yes{border-color:rgba(37,99,235,.3);box-shadow:0 0 40px rgba(37,99,235,.06)}
+.forwho-card.no{border-color:var(--border)}
+.forwho-card:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.forwho-card h3{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px}
+.forwho-card.yes h3{color:var(--accent)}.forwho-card.no h3{color:var(--fg-muted)}
+.forwho-list{display:flex;flex-direction:column;gap:14px}
+.forwho-item{display:flex;align-items:flex-start;gap:12px;font-size:14px;line-height:1.65;color:var(--fg-muted)}
+.forwho-item .icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:2px;font-weight:700}
+.forwho-card.yes .icon{background:rgba(37,99,235,.15);color:var(--accent)}.forwho-card.no .icon{background:rgba(255,255,255,.05);color:#444}
+.forwho-title{text-align:center}
 
-.li2{background:rgba(255,255,255,.03);border-radius:14px;padding:18px 22px;cursor:pointer;border:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;transition:all .2s;backdrop-filter:blur(10px)}.li2:hover{border-color:rgba(37,99,235,.25);background:rgba(37,99,235,.03)}
+/* PROBLEM */
+#problem{background:var(--bg2)}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.problem-card{background:var(--card);border:1px solid var(--border);padding:40px 36px;border-radius:var(--radius);transition:all .3s;backdrop-filter:blur(10px)}
+.problem-card:hover{background:var(--card-hover);border-color:var(--border-hover);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.problem-icon{font-size:36px;margin-bottom:20px}
+.problem-card h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;text-transform:uppercase;margin-bottom:12px;letter-spacing:-.01em}
+.problem-card p{font-size:14px;line-height:1.8;color:var(--fg-muted)}
+.pill{display:inline-flex;align-items:center;margin-top:20px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);padding:5px 12px;border-radius:100px}
 
-.mbg{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
-.mbox{background:rgba(22,22,32,.92);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px;width:500px;max-width:94vw;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.4)}
-.mtitle{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:20px}
-.fr{display:flex;gap:12px;margin-bottom:14px}.fr>div{flex:1}
-.fr .inp,.fr select,.fr textarea{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--fg);font-size:14px;outline:none}
-.fr .inp:focus,.fr select:focus,.fr textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-.fr textarea{min-height:50px;resize:vertical}
-.br{display:flex;gap:10px;margin-top:18px}
-.bc{flex:1;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--fg-muted);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:all .2s}.bc:hover{background:rgba(255,255,255,.04)}
-.bs{flex:1;padding:12px;border-radius:12px;border:none;background:var(--accent);color:#fff;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 2px 10px rgba(37,99,235,.2);transition:all .2s}.bs:hover{box-shadow:0 4px 16px rgba(37,99,235,.3)}
-.bd{width:100%;padding:10px;border-radius:12px;border:1px solid rgba(239,68,68,.12);background:transparent;color:#ef4444;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-top:12px;transition:all .2s}.bd:hover{background:rgba(239,68,68,.04)}
+/* HOW */
+#how{background:var(--bg)}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+.how-step{background:var(--card);border:1px solid var(--border);padding:36px 28px;border-radius:var(--radius);transition:all .3s;position:relative;overflow:hidden}
+.how-step::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.how-step:hover::before{opacity:1}
+.how-step:hover{background:var(--card-hover);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.step-num{font-family:'Montserrat',sans-serif;font-size:52px;font-weight:900;color:rgba(37,99,235,.1);line-height:1;margin-bottom:20px;letter-spacing:-.04em}
+.how-step h3{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;margin-bottom:10px;letter-spacing:-.01em}
+.how-step p{font-size:13px;line-height:1.75;color:var(--fg-muted)}
 
-.phr{display:flex;gap:8px}
-.phc{width:100px;flex-shrink:0;padding:11px 8px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--fg);font-size:13px}
+/* WHY */
+#why{background:var(--bg2)}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:56px}
+.why-card{background:var(--card);border:1px solid var(--border);padding:36px;border-radius:var(--radius);display:flex;gap:20px;align-items:flex-start;transition:all .3s;backdrop-filter:blur(10px)}
+.why-card:hover{background:var(--card-hover);border-color:var(--border-hover);transform:translateY(-3px);box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.why-icon-wrap{width:52px;height:52px;border-radius:var(--radius-sm);background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.2);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.why-card h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;margin-bottom:8px;letter-spacing:-.01em}
+.why-card p{font-size:14px;line-height:1.75;color:var(--fg-muted)}
+.founder-block{margin-top:20px;background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(212,175,55,.04));border:1px solid rgba(37,99,235,.2);border-radius:var(--radius);padding:48px;display:flex;gap:40px;align-items:center;backdrop-filter:blur(10px)}
+.founder-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#1d4ed8);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:26px;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 0 30px var(--accent-glow)}
+.founder-text h3{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;margin-bottom:10px;letter-spacing:-.02em}
+.founder-text p{font-size:15px;line-height:1.85;color:var(--fg-muted);max-width:600px}
+.founder-tag{display:inline-flex;margin-top:16px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.2);padding:6px 14px;border-radius:100px}
 
-.cd-wrap{max-width:820px}
-.cd-back{display:inline-flex;align-items:center;gap:6px;color:var(--fg-muted);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;margin-bottom:24px;padding:0;transition:color .2s}.cd-back:hover{color:var(--fg)}
-.cd-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.06)}
-.cd-name{font-family:'Montserrat',sans-serif;font-size:32px;font-weight:900;text-transform:uppercase;letter-spacing:-.02em}
-.cd-brand{font-size:14px;color:var(--fg-muted);margin-top:4px}
-.cd-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;margin-bottom:24px;background:rgba(255,255,255,.04);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
-.cd-field{background:var(--bg2);padding:18px 20px}
-.cd-field-val{font-size:15px;font-weight:600;margin-top:4px}
-.cd-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;margin-bottom:16px;backdrop-filter:blur(10px)}
-.cd-section-title{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--fg-muted);margin-bottom:14px}
-.cd-textarea{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--fg);font-size:14px;font-family:'Open Sans',sans-serif;min-height:140px;resize:vertical;outline:none;line-height:1.7;transition:all .2s}.cd-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-.cd-actions{display:flex;gap:10px;margin-top:24px}
-.cd-save{padding:12px 24px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--gold),#c9a52e);color:#121212;font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;transition:all .2s;box-shadow:0 2px 10px rgba(212,175,55,.15)}.cd-save:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(212,175,55,.25)}
-.cd-edit{padding:12px 24px;border-radius:12px;border:1px solid rgba(37,99,235,.25);background:rgba(37,99,235,.06);color:var(--accent);font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}.cd-edit:hover{background:rgba(37,99,235,.1)}
-.cd-del{padding:12px 24px;border-radius:12px;border:1px solid rgba(239,68,68,.12);background:transparent;color:#ef4444;font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;transition:all .2s}.cd-del:hover{background:rgba(239,68,68,.04)}
-.cd-stage{padding:7px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--fg);font-size:13px;font-family:'Open Sans',sans-serif}
+/* RESULTS */
+#results{background:var(--bg)}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.result-card{background:var(--card);border:1px solid var(--border);padding:40px 36px;border-radius:var(--radius);transition:all .3s;backdrop-filter:blur(10px)}
+.result-card:hover{background:var(--card-hover);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.result-tag{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block}
+.result-num{font-family:'Montserrat',sans-serif;font-size:52px;font-weight:900;letter-spacing:-.04em;line-height:1}.result-num span{color:var(--gold)}
+.result-label{font-size:13px;color:var(--fg-muted);margin-top:8px;line-height:1.5}
+.result-card h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;margin:24px 0 10px;letter-spacing:-.01em}
+.result-card p{font-size:13px;line-height:1.75;color:var(--fg-muted)}
 
-.fsm{background:rgba(255,255,255,.02);border-radius:16px;padding:32px;border:1px solid rgba(255,255,255,.06);max-width:600px;backdrop-filter:blur(10px)}
-.fsm .inp,.fsm select,.fsm textarea{background:rgba(255,255,255,.04)}.fsm .phc{background:rgba(255,255,255,.04)}
-.bau{width:100%;padding:15px;border-radius:12px;border:none;font-family:'Montserrat',sans-serif;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;background:linear-gradient(135deg,var(--gold),#c9a52e);color:#121212;margin-top:10px;transition:all .2s;box-shadow:0 4px 16px rgba(212,175,55,.15)}.bau:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(212,175,55,.25)}.bau.ok{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 4px 16px rgba(16,185,129,.2)}
+/* TESTIMONIALS */
+#testimonials{background:var(--bg2)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.testi-card{background:var(--card);border:1px solid var(--border);padding:32px;border-radius:var(--radius);display:flex;flex-direction:column;gap:16px;transition:all .3s;backdrop-filter:blur(10px)}
+.testi-card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.testi-stars{color:var(--gold);font-size:14px;letter-spacing:3px}
+.testi-text{font-size:14px;line-height:1.85;color:var(--fg-muted);flex:1}
+.testi-author{border-top:1px solid var(--border);padding-top:16px;display:flex;align-items:center;gap:12px}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:900;font-size:14px;color:#fff;flex-shrink:0}
+.testi-name{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700}
+.testi-role{font-size:11px;color:var(--fg-muted);margin-top:2px}
 
-.brf{position:fixed;bottom:24px;left:24px;width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);backdrop-filter:blur(20px);color:var(--fg-muted);display:flex;align-items:center;justify-content:center;z-index:50;transition:all .2s}.brf:hover{background:rgba(255,255,255,.08);color:var(--fg);border-color:rgba(255,255,255,.12)}
+/* AUDIT CTA */
+#audit{background:var(--bg);padding:100px 60px;text-align:center;position:relative;overflow:hidden}
+.audit-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(212,175,55,.07) 0%,transparent 65%);pointer-events:none}
+#audit .section-title{margin-bottom:16px}
+#audit p{font-size:17px;color:var(--fg-muted);max-width:480px;margin:0 auto 36px;line-height:1.85}
+.audit-pills{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:44px}
+.audit-pill{display:flex;align-items:center;gap:6px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted);background:var(--card);border:1px solid var(--border);padding:8px 16px;border-radius:100px}
+.audit-pill::before{content:'✓';color:var(--gold)}
 
-@media(max-width:768px){.d{padding:20px 16px}.fr{flex-direction:column;gap:12px}.sts{flex-direction:column}.tb{flex-direction:column;align-items:stretch}.tb .inp{width:100%}.tbr{margin-left:0}.pp{flex-direction:column}.cd-grid{grid-template-columns:1fr!important}.hdr{flex-direction:column;align-items:flex-start}.cd-layout{grid-template-columns:1fr!important}}
+/* CONTACT */
+#contact{background:var(--bg2);padding:120px 60px}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-info h3{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;margin-bottom:12px}
+.contact-info p{font-size:15px;line-height:1.85;color:var(--fg-muted);margin-bottom:28px}
+.contact-detail{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.contact-detail a{color:var(--fg-muted);text-decoration:none;font-size:14px;display:flex;align-items:center;gap:10px;transition:color .2s}.contact-detail a:hover{color:var(--fg)}
+.no-contract-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.2);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:9px 16px;border-radius:100px;margin-bottom:28px}
+.contact-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:7px}
+.form-group label{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-muted);font-weight:700}
+.form-group input,.form-group textarea,.form-group select{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--fg);padding:14px 18px;font-size:14px;border-radius:var(--radius-sm);outline:none;transition:all .2s;font-family:'Open Sans',sans-serif}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(37,99,235,.5);background:rgba(37,99,235,.06);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.form-group textarea{resize:vertical;min-height:110px}
+.form-group select option{background:#16161f}
+.form-submit{background:var(--gold);color:#0a0a0f;padding:17px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;border-radius:100px;transition:all .25s;margin-top:4px;box-shadow:0 0 30px var(--gold-glow)}.form-submit:hover{background:#c9a52e;transform:translateY(-1px);box-shadow:0 0 40px var(--gold-glow)}
+.phone-row{display:flex;gap:8px}
+.phone-code{width:110px;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--fg);padding:14px 12px;font-size:13px;border-radius:var(--radius-sm);outline:none;font-family:'Open Sans',sans-serif;cursor:pointer}.phone-code:focus{border-color:rgba(37,99,235,.5)}
+.phone-code option,.phone-number{background:#16161f}
+.phone-number{flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--fg);padding:14px 18px;font-size:14px;border-radius:var(--radius-sm);outline:none;font-family:'Open Sans',sans-serif}.phone-number:focus{border-color:rgba(37,99,235,.5);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+
+/* FOOTER */
+footer{padding:36px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;background:var(--bg)}
+.footer-logo{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;letter-spacing:.02em}.footer-logo span{color:var(--accent)}
+footer p{font-size:12px;color:var(--fg-muted)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-family:'Montserrat',sans-serif;font-size:11px;color:var(--fg-muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;font-weight:600}.footer-links a:hover{color:var(--fg)}
+
+@media(max-width:900px){
+  nav{top:12px;width:calc(100% - 24px);padding:12px 16px;border-radius:20px}
+  nav ul{display:none}
+  section,#forwho,#audit,#contact{padding:80px 24px}
+  #hero{padding:130px 24px 80px}
+  h1{font-size:clamp(36px,11vw,64px)}
+  .hero-proof{grid-template-columns:repeat(2,1fr)}
+  .problem-grid,.how-steps,.results-grid,.testi-grid,.why-grid{grid-template-columns:1fr}
+  .forwho-inner{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  footer{flex-direction:column;text-align:center}
+  .founder-block{flex-direction:column;padding:32px;gap:24px}
+  .phone-code{width:100px}
+  .audit-pills{gap:8px}
+}
 </style>
 </head>
 <body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">EZ<span>Launch</span>Lab</div>
+  <ul>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView()">Free PPC Audit</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-badge">Amazon PPC Agency · Founded by a Seller</div>
+  <h1>
+    <span class="word" style="animation-delay:.2s">Stop</span>&nbsp;<span class="word" style="animation-delay:.32s">losing</span>&nbsp;<span class="word" style="animation-delay:.44s">money</span><br>
+    <span class="word" style="animation-delay:.56s">on</span>&nbsp;<span class="word" style="animation-delay:.64s">ads</span>&nbsp;<span class="word" style="animation-delay:.72s">that</span>&nbsp;<span class="word" style="animation-delay:.8s">don't</span><br>
+    <em><span class="word" style="animation-delay:.92s">convert.</span></em>
+  </h1>
+  <div class="hero-sub">
+    <p id="typewriter-text" style="font-size:17px;line-height:1.85;color:var(--fg-muted);min-height:32px"></p>
+  </div>
+  <div class="hero-ctas">
+    <button class="btn btn-gold" onclick="document.getElementById('contact').scrollIntoView()">Get My Free PPC Audit →</button>
+    <button class="btn btn-outline" onclick="document.getElementById('how').scrollIntoView()">See How It Works</button>
+  </div>
+  <div class="hero-proof">
+    <div class="proof-item"><div class="proof-num">3<span>+</span></div><div class="proof-label">Years Managing Amazon PPC</div></div>
+    <div class="proof-item"><div class="proof-num"><span class="g">↓</span>ACoS</div><div class="proof-label">Average Result in 60 Days</div></div>
+    <div class="proof-item"><div class="proof-num">0</div><div class="proof-label">Long-Term Contracts</div></div>
+    <div class="proof-item"><div class="proof-num">1<span>:1</span></div><div class="proof-label">Dedicated Strategist</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap"><div class="marquee-track">
+  <span>Amazon PPC Management</span><span>·</span><span>ACoS Reduction</span><span>·</span><span class="gold">EZLaunchLab</span><span>·</span><span>Sponsored Products</span><span>·</span><span>Keyword Strategy</span><span>·</span><span>Weekly Reports</span><span>·</span><span>No Long-Term Contracts</span><span>·</span><span>Bid Optimization</span><span>·</span><span>TACoS Management</span><span>·</span>
+  <span>Amazon PPC Management</span><span>·</span><span>ACoS Reduction</span><span>·</span><span class="gold">EZLaunchLab</span><span>·</span><span>Sponsored Products</span><span>·</span><span>Keyword Strategy</span><span>·</span><span>Weekly Reports</span><span>·</span><span>No Long-Term Contracts</span><span>·</span><span>Bid Optimization</span><span>·</span><span>TACoS Management</span><span>·</span>
+</div></div>
+
+<!-- FOR WHO -->
+<div id="forwho">
+  <div class="forwho-title">
+    <div class="section-label">Who We Work With</div>
+    <div class="section-title">Built for <em>medium sellers.</em><br>Not everyone.</div>
+  </div>
+  <div class="forwho-inner">
+    <div class="forwho-card yes">
+      <h3>✦ &nbsp;EZLaunchLab is for you if...</h3>
+      <div class="forwho-list">
+        <div class="forwho-item"><div class="icon">✓</div><span>You're doing $10K–$150K/month on Amazon and want to grow profitably</span></div>
+        <div class="forwho-item"><div class="icon">✓</div><span>Your ACoS is too high and you're not sure why</span></div>
+        <div class="forwho-item"><div class="icon">✓</div><span>You've tried managing PPC yourself — and it's eating your time</span></div>
+        <div class="forwho-item"><div class="icon">✓</div><span>You feel like you're flying blind with no clear reporting</span></div>
+        <div class="forwho-item"><div class="icon">✓</div><span>You want a real person managing your account, not an algorithm</span></div>
+      </div>
+    </div>
+    <div class="forwho-card no">
+      <h3>✕ &nbsp;We're probably not a fit if...</h3>
+      <div class="forwho-list">
+        <div class="forwho-item"><div class="icon">✕</div><span>You're just starting out with under $3K/month in revenue</span></div>
+        <div class="forwho-item"><div class="icon">✕</div><span>You want guaranteed overnight results with zero effort</span></div>
+        <div class="forwho-item"><div class="icon">✕</div><span>You're looking for the cheapest option in the market</span></div>
+        <div class="forwho-item"><div class="icon">✕</div><span>You're not open to feedback on your listings or strategy</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-label">The Problem</div>
+  <div class="section-title">Why your Amazon ads<br>are <em>bleeding money</em></div>
+  <div class="problem-grid">
+    <div class="problem-card"><div class="problem-icon">🔥</div><h3>Wasted Ad Spend</h3><p>Most medium sellers waste 30–50% of their PPC budget on irrelevant keywords and poorly structured campaigns. Every wasted dollar is profit you'll never see.</p><div class="pill">We fix this first</div></div>
+    <div class="problem-card"><div class="problem-icon">🌑</div><h3>Zero Visibility</h3><p>Your last agency sent you a monthly PDF that raised more questions than it answered. You had no idea what was actually happening inside your account.</p><div class="pill">We report bi-weekly</div></div>
+    <div class="problem-card"><div class="problem-icon">🤖</div><h3>Set & Forget Management</h3><p>Big agencies dump you with a junior who manages 40 accounts. Nobody is watching your bids, catching wasted spend, or adapting your strategy in real time.</p><div class="pill">You get 1 dedicated strategist</div></div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how">
+  <div class="section-label">Our Process</div>
+  <div class="section-title">Simple. Transparent.<br><em>No BS.</em></div>
+  <div class="how-steps">
+    <div class="how-step"><div class="step-num">01</div><h3>Free PPC Audit</h3><p>We dig into your account and show you exactly where your budget is being wasted — before you spend a single dollar with us.</p></div>
+    <div class="how-step"><div class="step-num">02</div><h3>Custom Strategy</h3><p>Your dedicated strategist builds a campaign structure tailored to your products, margins, and goals — not a copy-paste template.</p></div>
+    <div class="how-step"><div class="step-num">03</div><h3>Launch & Optimize</h3><p>We go live and optimize daily. Bids, keywords, negatives, placements — all monitored and adjusted so your ACoS drops and profit grows.</p></div>
+    <div class="how-step"><div class="step-num">04</div><h3>Bi-Weekly Reports</h3><p>Every 2 weeks you get a plain-English report showing exactly what we did, what changed, and what's next. You're always in the loop.</p></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-label">Why EZLaunchLab</div>
+  <div class="section-title">We do things<br>differently — <span class="gold">here's how</span></div>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-icon-wrap">📊</div><div><h3>Full Transparency, Always</h3><p>No black-box reporting. You see every keyword, every bid change, every decision we make — explained in plain English, every single week.</p></div></div>
+    <div class="why-card"><div class="why-icon-wrap">🎯</div><div><h3>Dedicated Strategist</h3><p>You get one senior strategist who knows your brand, your margins, and your goals. Not a rotating junior team managing 80 accounts at once.</p></div></div>
+    <div class="why-card"><div class="why-icon-wrap">🔓</div><div><h3>No Long-Term Contracts</h3><p>We earn your business every month. Cancel anytime with 30 days notice. We're confident in our results — you shouldn't have to be locked in to stay.</p></div></div>
+    <div class="why-card"><div class="why-icon-wrap">🆓</div><div><h3>Free Audit Before You Commit</h3><p>We show you the gaps in your current PPC setup before you pay us a cent. You walk away with actionable insights whether you hire us or not.</p></div></div>
+  </div>
+  <div class="founder-block">
+    <div class="founder-avatar">EZ</div>
+    <div class="founder-text">
+      <h3>Founded by an Amazon seller — not a marketing exec.</h3>
+      <p>We built EZLaunchLab because we lived the frustration firsthand. Wasted ad spend, agencies that went dark, reports that said nothing. We know what it feels like to watch your ACoS climb and not know why.</p>
+      <div class="founder-tag">Founded by a seller · 3 years experience</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+  <div class="section-label">Case Studies</div>
+  <div class="section-title">Real results for<br><em>real sellers</em></div>
+  <div class="results-grid">
+    <div class="result-card"><span class="result-tag">Home & Kitchen · Sponsored Products</span><div class="result-num"><span>↓</span>38%</div><div class="result-label">ACoS reduction in 45 days</div><h3>From bleeding to profitable</h3><p>A home goods seller came to us with a 54% ACoS. We rebuilt their campaigns from scratch and brought ACoS down to 16% — without touching their ad budget.</p></div>
+    <div class="result-card"><span class="result-tag">Health & Beauty · Full Account</span><div class="result-num"><span>×</span>2.4</div><div class="result-label">Revenue growth in 90 days</div><h3>Scaling without overspending</h3><p>A beauty brand stuck at $18K/month. We restructured their keyword strategy and scaled them to $43K/month while keeping TACoS under 12%.</p></div>
+    <div class="result-card"><span class="result-tag">Sports & Outdoors · PPC Rescue</span><div class="result-num"><span>$</span>11K</div><div class="result-label">Monthly wasted spend recovered</div><h3>Budget rescue & rebuild</h3><p>An outdoors brand was hemorrhaging $11K/month on auto campaigns targeting completely irrelevant search terms. Found in week one. Fixed in week two.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-label">Testimonials</div>
+  <div class="section-title">Sellers who stopped<br><em>wasting money</em></div>
+  <div class="testi-grid">
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Finally an agency that actually shows me what's happening. I get a weekly report I can understand, and my ACoS dropped from 48% to 19% in two months. Game changer."</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#2563EB,#1d4ed8)">J</div><div><div class="testi-name">James R.</div><div class="testi-role">Home & Kitchen · $40K/mo</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"I was skeptical because I'd been burned by two agencies before. EZLaunchLab actually showed me where my money was going in the free audit. Hired them that same week."</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#166534,#15803d)">S</div><div><div class="testi-name">Sarah M.</div><div class="testi-role">Health & Beauty · $55K/mo</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The no long-term contract policy sold me. Six months later I'm still here because the results speak for themselves. Profit is up, stress is down."</p><div class="testi-author"><div class="testi-avatar" style="background:linear-gradient(135deg,#92400e,#D4AF37)">M</div><div><div class="testi-name">Mike T.</div><div class="testi-role">Sports & Outdoors · $30K/mo</div></div></div></div>
+  </div>
+</section>
+
+<!-- AUDIT CTA -->
+<section id="audit">
+  <div class="audit-orb"></div>
+  <div class="section-label">Free PPC Audit</div>
+  <div class="section-title">Find out where your<br>budget is going — <span class="gold">for free</span></div>
+  <p>We'll audit your Amazon PPC account and show you exactly what's working, what's wasting money, and what to fix first. No strings attached.</p>
+  <div class="audit-pills">
+    <div class="audit-pill">Takes 30 minutes</div>
+    <div class="audit-pill">No obligation</div>
+    <div class="audit-pill">Real insights</div>
+    <div class="audit-pill">Cancel anytime</div>
+  </div>
+  <a href="https://cal.com/easy-lauch-jqk5yn" target="_blank" class="btn btn-gold" style="font-size:14px;padding:18px 40px">Book My Free Audit →</a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get Started</div>
+  <div class="section-title">Let's look at<br>your account <em>together</em></div>
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <h3>Book your free PPC audit</h3>
+      <p>Tell us a bit about your brand and we'll be in touch within a few hours to schedule your free audit call. No long-term commitment required.</p>
+      <div class="no-contract-badge">🔓 No long-term contracts · Cancel anytime</div>
+      <div class="contact-detail">
+        <a href="mailto:easylauchlab@gmail.com">✉️ &nbsp;easylauchlab@gmail.com</a>
+        <a href="#">💬 &nbsp;Response within a few hours</a>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <a href="https://www.instagram.com/ezlaunchlab/" target="_blank" style="width:44px;height:44px;border:1px solid rgba(255,255,255,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--fg-muted);text-decoration:none;transition:all .25s;backdrop-filter:blur(10px);background:rgba(255,255,255,.04)" onmouseover="this.style.borderColor='#E1306C';this.style.color='#E1306C';this.style.background='rgba(225,48,108,.08)'" onmouseout="this.style.borderColor='rgba(255,255,255,.15)';this.style.color='var(--fg-muted)';this.style.background='rgba(255,255,255,.04)'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+      </div>
+    </div>
+    <form class="contact-form" action="https://formspree.io/f/xaqlkejr" method="POST" onsubmit="return ezSubmit()">
+      <div class="form-row">
+        <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="Jane Smith" required></div>
+        <div class="form-group"><label>Brand Name</label><input type="text" name="brand" placeholder="Your Amazon Brand" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@brand.com" required></div>
+        <div class="form-group"><label>Phone Number</label>
+          <div class="phone-row">
+            <select class="phone-code" id="ezpc">
+              <option value="+1" selected>US +1</option>
+              <option value="+44">UK +44</option>
+              <option value="+61">AU +61</option>
+              <option value="+49">DE +49</option>
+              <option value="+33">FR +33</option>
+              <option value="+48">PL +48</option>
+              <option value="+380">UA +380</option>
+              <option value="+91">IN +91</option>
+              <option value="+55">BR +55</option>
+              <option value="+971">AE +971</option>
+              <option value="+234">NG +234</option>
+            </select>
+            <input class="phone-number" type="tel" name="phone" placeholder="555 123-4567">
+          </div>
+        </div>
+      </div>
+      <div class="form-group"><label>Monthly Revenue</label>
+        <select name="revenue">
+          <option value="">Select range</option>
+          <option>$10K – $30K / month</option>
+          <option>$30K – $70K / month</option>
+          <option>$70K – $150K / month</option>
+          <option>$150K+ / month</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Current ACoS (if known)</label><input type="text" name="acos" placeholder="e.g. 35% — or I don't know yet"></div>
+      <div class="form-group"><label>Biggest PPC challenge right now</label><textarea name="challenge" placeholder="Tell us what's frustrating you most about your Amazon ads..."></textarea></div>
+      <input type="hidden" name="_next" value="https://cal.com/easy-lauch-jqk5yn">
+      <input type="hidden" name="_subject" value="New PPC Audit Request — EZLaunchLab">
+      <button type="submit" class="form-submit">Book My Free Audit →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">EZ<span>Launch</span>Lab</div>
+  <p>© 2025 EZLaunchLab. Amazon PPC Agency. All rights reserved.</p>
+  <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+</footer>
+
 <script>
-var SU='https://mkxbjcljljmygruoodvv.supabase.co';
-var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1reGJqY2xqbGpteWdydW9vZHZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NTg5NTgsImV4cCI6MjA5MTMzNDk1OH0.-s7YhaLGv99e_YvJ_bEh_7n4BlaNBF0nPFH5D-UHA9A';
-var STAGES=['New Lead','Contacted','Qualified','Proposal','Closed'];
-var SCLR={'New Lead':'#2563EB',Contacted:'#D4AF37',Qualified:'#06b6d4',Proposal:'#8b5cf6',Closed:'#10b981'};
-var REVS=['Under $10k','$10k-$25k','$25k-$50k','$50k-$100k','$100k-$250k','$250k+'];
-var CODES=[{c:'+1',l:'US +1'},{c:'+44',l:'UK +44'},{c:'+61',l:'AU +61'},{c:'+49',l:'DE +49'},{c:'+33',l:'FR +33'},{c:'+48',l:'PL +48'},{c:'+380',l:'UA +380'},{c:'+91',l:'IN +91'},{c:'+55',l:'BR +55'},{c:'+971',l:'AE +971'},{c:'+234',l:'NG +234'}];
-var sb=window.supabase.createClient(SU,SK);
-var user=null,contacts=[],leads=[],poll=null;
-var curTab='crm',curView='table',sq='',sf='All',viewCid=null,showTacos=true,showAcos=true,showAd=true,dateFrom='',dateTo='',showLog=false,expandChart=false;
-
-async function doLogin(){
-  var em=document.getElementById('le').value.toLowerCase().trim();
-  var pw=document.getElementById('lp').value;
-  var er=document.getElementById('lerr');er.classList.add('hide');
-  if(!em||!pw){er.textContent='Enter email and password.';er.classList.remove('hide');return}
-  var btn=document.querySelector('.bl');btn.textContent='Signing in...';btn.disabled=true;
-  var res=await sb.auth.signInWithPassword({email:em,password:pw});
-  if(res.error){er.textContent=res.error.message;er.classList.remove('hide');btn.textContent='Sign In';btn.disabled=false;return}
-  user={email:res.data.user.email,role:'admin',name:'Admin'};btn.textContent='Sign In';btn.disabled=false;showD();
-}
-async function doLogout(){await sb.auth.signOut();user=null;if(poll)clearInterval(poll);document.getElementById('ls').classList.remove('hide');document.getElementById('ds').classList.add('hide')}
-async function loadC(){var r=await sb.from('contacts').select('*').order('created_at',{ascending:false});contacts=r.data||[]}
-async function loadL(){var r=await sb.from('leads').select('*').eq('added_to_crm',false).order('created_at',{ascending:false});leads=r.data||[]}
-async function showD(){document.getElementById('ls').classList.add('hide');document.getElementById('ds').classList.remove('hide');await loadC();await loadL();render();if(poll)clearInterval(poll);poll=setInterval(async function(){await loadL();if(curTab!=='form'&&!viewCid)render()},5000)}
-
-function fD(d){try{var p=d.toString().split('T')[0].split('-');if(p.length===3){var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return months[parseInt(p[1])-1]+' '+parseInt(p[2])}return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'})}catch(e){return'-'}}
-function sbdg(s){var c=SCLR[s]||'#2563EB';return '<span class="bdg" style="background:'+c+'15;color:'+c+';border:1px solid '+c+'30">'+s+'</span>'}
-function copts(s){return CODES.map(function(c){return '<option value="'+c.c+'" '+(c.c===s?'selected':'')+'>'+c.l+'</option>'}).join('')}
-function ropts(s){return '<option value="">Select</option>'+REVS.map(function(r){return '<option value="'+r+'" '+(r===s?'selected':'')+'>'+r+'</option>'}).join('')}
-function sopts(s){return STAGES.map(function(x){return '<option value="'+x+'" '+(x===s?'selected':'')+'>'+x+'</option>'}).join('')}
-
-function viewContact(id){viewCid=id;render()}
-function backToList(){viewCid=null;render()}
-
-function renderChart(tacosData,acosData,adDepData,showT,showA,showAd){
-  var allDates={};
-  if(showT)tacosData.forEach(function(d){allDates[d.date]=allDates[d.date]||{};allDates[d.date].tacos=d.value});
-  if(showA)acosData.forEach(function(d){allDates[d.date]=allDates[d.date]||{};allDates[d.date].acos=d.value});
-  if(showAd)adDepData.forEach(function(d){allDates[d.date]=allDates[d.date]||{};allDates[d.date].addep=d.value});
-  var keys=Object.keys(allDates).sort(function(a,b){return new Date(a)-new Date(b)});
-  if(keys.length<1)return '<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:40px;text-align:center;color:var(--fg-muted);font-size:12px;font-family:Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase">No data yet. Add entries below.</div>';
-  var W=600,H=180,PL=48,PR=15,PT=20,PB=28;
-  var cw=W-PL-PR,ch=H-PT-PB;
-  var allVals=[];
-  keys.forEach(function(k){if(allDates[k].tacos!==undefined)allVals.push(allDates[k].tacos);if(allDates[k].acos!==undefined)allVals.push(allDates[k].acos);if(allDates[k].addep!==undefined)allVals.push(allDates[k].addep)});
-  var mn=Math.min.apply(null,allVals),mx=Math.max.apply(null,allVals);
-  var range=mx-mn;if(range===0)range=10;
-  mn=Math.max(0,mn-range*0.2);mx=mx+range*0.2;range=mx-mn;
-  var svg='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">';
-  var steps=4;
-  for(var i=0;i<=steps;i++){var y=PT+ch-(i/steps)*ch;var v=(mn+(i/steps)*range).toFixed(1);svg+='<line x1="'+PL+'" y1="'+y+'" x2="'+(W-PR)+'" y2="'+y+'" stroke="#2a2a32" stroke-width="1"/>';svg+='<text x="'+(PL-6)+'" y="'+(y+3)+'" fill="#9CA3AF" font-size="9" font-family="Montserrat,sans-serif" text-anchor="end" font-weight="600">'+v+'%</text>';}
-  function getXY(idx,val){return{x:PL+(keys.length===1?cw/2:(idx/(keys.length-1))*cw),y:PT+ch-((val-mn)/range)*ch}}
-  function drawLine(data,color,field){
-    var pts=[];keys.forEach(function(k,i){if(allDates[k][field]!==undefined)pts.push({x:getXY(i,allDates[k][field]).x,y:getXY(i,allDates[k][field]).y,v:allDates[k][field]})});
-    if(pts.length<1)return '';
-    var s='';var gid='g'+field+Math.random().toString(36).substr(2,4);
-    if(pts.length>1){var area='M '+pts[0].x+' '+(PT+ch);pts.forEach(function(p){area+=' L '+p.x+' '+p.y});area+=' L '+pts[pts.length-1].x+' '+(PT+ch)+' Z';s+='<defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="'+color+'"/><stop offset="100%" stop-color="'+color+'" stop-opacity="0"/></linearGradient></defs>';s+='<path d="'+area+'" fill="url(#'+gid+')" opacity="0.12"/>';var line='M '+pts[0].x+' '+pts[0].y;pts.forEach(function(p,i){if(i>0)line+=' L '+p.x+' '+p.y});s+='<path d="'+line+'" fill="none" stroke="'+color+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';}
-    pts.forEach(function(p){s+='<circle cx="'+p.x+'" cy="'+p.y+'" r="4" fill="'+color+'" stroke="#111118" stroke-width="2"/>';s+='<text x="'+p.x+'" y="'+(p.y-10)+'" fill="'+color+'" font-size="10" font-family="Montserrat,sans-serif" text-anchor="middle" font-weight="800">'+p.v+'%</text>'});
-    return s;
+// Typewriter
+var tw=document.getElementById('typewriter-text');
+var twText='We stop wasted spend. We report every 2 weeks. No BS, no lock-in.';
+var twI=0;
+function typeNext(){
+  if(twI<=twText.length){
+    tw.innerHTML=twText.slice(0,twI)+'<span style="display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:middle;margin-left:2px;animation:blink .8s step-end infinite"></span>';
+    twI++;
+    setTimeout(typeNext, twI===twText.length ? 0 : 45);
+  } else {
+    tw.innerHTML=twText;
   }
-  if(showT)svg+=drawLine(tacosData,'#D4AF37','tacos');
-  if(showA)svg+=drawLine(acosData,'#2563EB','acos');
-  if(showAd)svg+=drawLine(adDepData,'#10b981','addep');
-  keys.forEach(function(k,i){if(keys.length<=8||i%Math.ceil(keys.length/8)===0||i===keys.length-1){svg+='<text x="'+getXY(i,0).x+'" y="'+(H-5)+'" fill="#9CA3AF" font-size="8" font-family="Montserrat,sans-serif" text-anchor="middle" font-weight="600">'+fD(k)+'</text>'}});
-  svg+='</svg>';return '<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px 10px">'+svg+'</div>';
 }
+setTimeout(typeNext, 1600);
 
-async function addTacos(id){
-  var dt=document.getElementById('tacDate').value;var vl=parseFloat(document.getElementById('tacVal').value);
-  if(!dt||isNaN(vl)){alert('Enter date and TACoS value');return}
-  var c=contacts.find(function(x){return x.id===id});if(!c)return;
-  var th=c.tacos_history||[];try{if(typeof th==='string')th=JSON.parse(th)}catch(e){th=[]}
-  th.push({date:dt,value:vl});th.sort(function(a,b){return new Date(a.date)-new Date(b.date)});
-  await sb.from('contacts').update({tacos_history:th}).eq('id',id);await loadC();render();
-}
-async function rmTacos(id,idx){
-  var c=contacts.find(function(x){return x.id===id});if(!c)return;
-  var th=c.tacos_history||[];try{if(typeof th==='string')th=JSON.parse(th)}catch(e){th=[]}
-  th.sort(function(a,b){return new Date(a.date)-new Date(b.date)});th.splice(idx,1);
-  await sb.from('contacts').update({tacos_history:th}).eq('id',id);await loadC();render();
-}
-async function addAcos(id){
-  var dt=document.getElementById('acDate').value;var vl=parseFloat(document.getElementById('acVal').value);
-  if(!dt||isNaN(vl)){alert('Enter date and ACOS value');return}
-  var c=contacts.find(function(x){return x.id===id});if(!c)return;
-  var ah=c.acos_history||[];try{if(typeof ah==='string')ah=JSON.parse(ah)}catch(e){ah=[]}
-  ah.push({date:dt,value:vl});ah.sort(function(a,b){return new Date(a.date)-new Date(b.date)});
-  await sb.from('contacts').update({acos_history:ah}).eq('id',id);await loadC();render();
-}
-async function rmAcos(id,idx){
-  var c=contacts.find(function(x){return x.id===id});if(!c)return;
-  var ah=c.acos_history||[];try{if(typeof ah==='string')ah=JSON.parse(ah)}catch(e){ah=[]}
-  ah.sort(function(a,b){return new Date(a.date)-new Date(b.date)});ah.splice(idx,1);
-  await sb.from('contacts').update({acos_history:ah}).eq('id',id);await loadC();render();
-}
-async function addAdDep(id){
-  var dt=document.getElementById('adDate').value;var vl=parseFloat(document.getElementById('adVal').value);
-  if(!dt||isNaN(vl)){alert('Enter date and Ad Dependency value');return}
-  var c=contacts.find(function(x){return x.id===id});if(!c)return;
-  var ad=c.adspend_history||[];try{if(typeof ad==='string')ad=JSON.parse(ad)}catch(e){ad=[]}
-  ad.push({date:dt,value:vl});ad.sort(function(a,b){return new Date(a.date)-new Date(b.date)});
-  await sb.from('contacts').update({adspend_history:ad}).eq('id',id);await loadC();render();
-}
-async function rmAdDep(id,idx){
-  var c=contacts.find(function(x){return x.id===id});if(!c)return;
-  var ad=c.adspend_history||[];try{if(typeof ad==='string')ad=JSON.parse(ad)}catch(e){ad=[]}
-  ad.sort(function(a,b){return new Date(a.date)-new Date(b.date)});ad.splice(idx,1);
-  await sb.from('contacts').update({adspend_history:ad}).eq('id',id);await loadC();render();
-}
-
-function render(){
-  var h='';
-
-  if(viewCid){
-    var c=contacts.find(function(x){return x.id===viewCid});
-    if(!c){viewCid=null;}else{
-      var clr=SCLR[c.stage]||'#2563EB';
-      h+='<button class="cd-back" onclick="backToList()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to contacts</button>';
-      h+='<div class="cd-header"><div><div class="cd-name">'+c.name+'</div><div class="cd-brand">'+(c.brand||'No brand')+'</div></div><div style="display:flex;align-items:center;gap:10px">'+sbdg(c.stage)+'<select class="cd-stage" onchange="updateStage('+c.id+',this.value)">'+sopts(c.stage)+'</select></div></div>';
-      // Two column layout (or full width when expanded)
-      h+='<div style="display:grid;grid-template-columns:'+(expandChart?'1fr':'1fr 1fr')+';gap:20px;align-items:start" class="cd-layout">';
-      // LEFT COLUMN - Info (hidden when expanded)
-      if(!expandChart){
-      h+='<div>';
-      h+='<div class="cd-grid" style="grid-template-columns:1fr 1fr">';
-      h+='<div class="cd-field"><div class="lbl">Email</div><div class="cd-field-val">'+(c.email||'-')+'</div></div>';
-      h+='<div class="cd-field"><div class="lbl">Phone</div><div class="cd-field-val">'+(c.phone||'-')+'</div></div>';
-      h+='<div class="cd-field"><div class="lbl">Revenue</div><div class="cd-field-val">'+(c.revenue||'-')+'</div></div>';
-      h+='<div class="cd-field"><div class="lbl">ACOS</div><div class="cd-field-val">'+(c.acos||'-')+'</div></div>';
-      h+='<div class="cd-field"><div class="lbl">Added</div><div class="cd-field-val">'+fD(c.created_at)+'</div></div>';
-      h+='<div class="cd-field"><div class="lbl">Source</div><div class="cd-field-val">Website</div></div>';
-      h+='</div>';
-      if(c.challenge){h+='<div class="cd-section"><div class="cd-section-title">PPC Challenge</div><div style="font-size:14px;line-height:1.7">'+c.challenge+'</div></div>';}
-      h+='<div class="cd-section"><div class="cd-section-title">Notes / Comments</div><textarea class="cd-textarea" id="cdNotes" placeholder="Add your notes, follow-up reminders, call summaries...">'+(c.notes||'')+'</textarea><div style="margin-top:12px"><button class="cd-save" onclick="saveNotes('+c.id+')">Save Notes</button></div></div>';
-      h+='<div class="cd-actions"><button class="cd-edit" onclick="showCF('+c.id+')">Edit Contact</button><button class="cd-del" onclick="if(confirm(\'Delete this contact?\')){delC('+c.id+')}">Delete</button></div>';
-      h+='</div>';
-      }
-      // RIGHT COLUMN - Combined Graph
-      h+='<div>';
-      var th=c.tacos_history||[];try{if(typeof th==='string')th=JSON.parse(th)}catch(e){th=[]}
-      th.sort(function(a,b){return new Date(a.date)-new Date(b.date)});
-      var ah=c.acos_history||[];try{if(typeof ah==='string')ah=JSON.parse(ah)}catch(e){ah=[]}
-      ah.sort(function(a,b){return new Date(a.date)-new Date(b.date)});
-      var adh=c.adspend_history||[];try{if(typeof adh==='string')adh=JSON.parse(adh)}catch(e){adh=[]}
-      adh.sort(function(a,b){return new Date(a.date)-new Date(b.date)});
-      h+='<div class="cd-section"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div class="cd-section-title" style="margin-bottom:0">Performance</div><div style="display:flex;gap:6px">';
-      h+='<button style="padding:5px 12px;border-radius:3px;font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:1px solid '+(showTacos?'#D4AF37':'var(--border)')+';background:'+(showTacos?'rgba(212,175,55,.15)':'transparent')+';color:'+(showTacos?'#D4AF37':'var(--fg-muted)')+'" onclick="showTacos=!showTacos;render()">TACoS</button>';
-      h+='<button style="padding:5px 12px;border-radius:3px;font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:1px solid '+(showAcos?'#2563EB':'var(--border)')+';background:'+(showAcos?'rgba(37,99,235,.15)':'transparent')+';color:'+(showAcos?'#2563EB':'var(--fg-muted)')+'" onclick="showAcos=!showAcos;render()">ACOS</button>';
-      h+='<button style="padding:5px 12px;border-radius:3px;font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:1px solid '+(showAd?'#10b981':'var(--border)')+';background:'+(showAd?'rgba(16,185,129,.15)':'transparent')+';color:'+(showAd?'#10b981':'var(--fg-muted)')+'" onclick="showAd=!showAd;render()">Ad Dep</button>';
-      h+='<button style="padding:5px 12px;border-radius:3px;font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--fg-muted)" onclick="expandChart=!expandChart;render()">'+(expandChart?'&#x2716; Close':'&#x26F6; Expand')+'</button>';
-      h+='</div></div>';
-      h+='<div style="display:flex;gap:6px;align-items:center;margin-bottom:14px;flex-wrap:wrap">';
-      h+='<div style="font-family:Montserrat,sans-serif;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-muted)">Range:</div>';
-      h+='<input type="date" class="inp" value="'+dateFrom+'" onchange="dateFrom=this.value;render()" style="width:130px;padding:6px 8px;font-size:11px">';
-      h+='<span style="color:var(--fg-muted);font-size:11px">to</span>';
-      h+='<input type="date" class="inp" value="'+dateTo+'" onchange="dateTo=this.value;render()" style="width:130px;padding:6px 8px;font-size:11px">';
-      h+='<button style="background:none;border:1px solid var(--border);border-radius:3px;padding:6px 10px;color:var(--fg-muted);font-family:Montserrat,sans-serif;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer" onclick="dateFrom=\'\';dateTo=\'\';render()">All Time</button>';
-      h+='</div>';
-      var filteredTh=th.filter(function(d){if(dateFrom&&d.date<dateFrom)return false;if(dateTo&&d.date>dateTo)return false;return true});
-      var filteredAh=ah.filter(function(d){if(dateFrom&&d.date<dateFrom)return false;if(dateTo&&d.date>dateTo)return false;return true});
-      var filteredAd=adh.filter(function(d){if(dateFrom&&d.date<dateFrom)return false;if(dateTo&&d.date>dateTo)return false;return true});
-      h+=renderChart(filteredTh,filteredAh,filteredAd,showTacos,showAcos,showAd);
-      // Combined log toggle
-      h+='<div style="margin-top:16px;border-top:1px solid var(--border);padding-top:14px">';
-      h+='<button style="display:flex;align-items:center;gap:8px;background:none;border:none;color:var(--fg-muted);font-family:Montserrat,sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;padding:0" onclick="showLog=!showLog;render()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transform:rotate('+(showLog?'90':'0')+'deg);transition:transform .2s"><path d="M9 18l6-6-6-6"/></svg> Data Log ('+(th.length+ah.length+adh.length)+' entries)</button>';
-      if(showLog){
-      h+='<div style="margin-top:12px">';
-      // Add TACoS
-      h+='<div style="display:flex;gap:6px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px">';
-      h+='<div style="font-family:Montserrat,sans-serif;font-size:9px;font-weight:700;color:#D4AF37;letter-spacing:.1em;width:50px;padding-bottom:8px">TACOS</div>';
-      h+='<div><div class="lbl">Date</div><input type="date" class="inp" id="tacDate" style="width:130px;padding:6px 8px;font-size:11px"></div>';
-      h+='<div><div class="lbl">%</div><input type="number" class="inp" id="tacVal" placeholder="12.5" step="0.1" style="width:80px;padding:6px 8px;font-size:11px"></div>';
-      h+='<button class="cd-save" style="padding:6px 14px;font-size:9px" onclick="addTacos('+c.id+')">Add</button></div>';
-      // Add ACOS
-      h+='<div style="display:flex;gap:6px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px">';
-      h+='<div style="font-family:Montserrat,sans-serif;font-size:9px;font-weight:700;color:#2563EB;letter-spacing:.1em;width:50px;padding-bottom:8px">ACOS</div>';
-      h+='<div><div class="lbl">Date</div><input type="date" class="inp" id="acDate" style="width:130px;padding:6px 8px;font-size:11px"></div>';
-      h+='<div><div class="lbl">%</div><input type="number" class="inp" id="acVal" placeholder="25.0" step="0.1" style="width:80px;padding:6px 8px;font-size:11px"></div>';
-      h+='<button class="cd-save" style="padding:6px 14px;font-size:9px;background:var(--accent)" onclick="addAcos('+c.id+')">Add</button></div>';
-      // Add Ad Dependency
-      h+='<div style="display:flex;gap:6px;align-items:flex-end;flex-wrap:wrap;margin-bottom:12px">';
-      h+='<div style="font-family:Montserrat,sans-serif;font-size:9px;font-weight:700;color:#10b981;letter-spacing:.1em;width:50px;padding-bottom:8px">AD DEP</div>';
-      h+='<div><div class="lbl">Date</div><input type="date" class="inp" id="adDate" style="width:130px;padding:6px 8px;font-size:11px"></div>';
-      h+='<div><div class="lbl">%</div><input type="number" class="inp" id="adVal" placeholder="40.0" step="0.1" style="width:80px;padding:6px 8px;font-size:11px"></div>';
-      h+='<button class="cd-save" style="padding:6px 14px;font-size:9px;background:#10b981" onclick="addAdDep('+c.id+')">Add</button></div>';
-      // Combined table
-      var allEntries=[];th.forEach(function(t,i){allEntries.push({date:t.date,type:'TACoS',value:t.value,color:'#D4AF37',idx:i})});ah.forEach(function(t,i){allEntries.push({date:t.date,type:'ACOS',value:t.value,color:'#2563EB',idx:i})});adh.forEach(function(t,i){allEntries.push({date:t.date,type:'Ad Dep',value:t.value,color:'#10b981',idx:i})});
-      allEntries.sort(function(a,b){return new Date(b.date)-new Date(a.date)});
-      if(allEntries.length){h+='<div style="max-height:160px;overflow-y:auto;border:1px solid var(--border);border-radius:3px"><table style="width:100%;font-size:11px"><thead><tr><th style="padding:6px 10px;position:sticky;top:0;background:var(--card)">Date</th><th style="padding:6px 10px;position:sticky;top:0;background:var(--card)">Type</th><th style="padding:6px 10px;position:sticky;top:0;background:var(--card)">Value</th><th style="padding:6px 10px;width:40px;position:sticky;top:0;background:var(--card)"></th></tr></thead><tbody>';
-      allEntries.forEach(function(e){var fn=e.type==='TACoS'?'rmTacos':e.type==='ACOS'?'rmAcos':'rmAdDep';h+='<tr><td style="padding:5px 10px;color:var(--fg-muted)">'+fD(e.date)+'</td><td style="padding:5px 10px;font-weight:700;color:'+e.color+';font-family:Montserrat,sans-serif;font-size:10px;letter-spacing:.08em">'+e.type+'</td><td style="padding:5px 10px;font-weight:600;color:'+e.color+'">'+e.value+'%</td><td style="padding:5px 10px"><button style="background:none;border:none;color:#ef4444;font-size:9px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif" onclick="'+fn+'('+c.id+','+e.idx+')">DEL</button></td></tr>'});
-      h+='</tbody></table></div>';}
-      h+='</div>';// end log content
-      }
-      h+='</div>';// end log section
-      h+='</div>';// end section
-      h+='</div>';// end right col
-      h+='</div>';// end grid
-      document.getElementById('dc').innerHTML=h;return;
-    }
-  }
-
-  // Header
-  h+='<div class="hdr"><div class="hl"><div><div class="hlogo">EZ<span>Launch</span>Lab</div><div class="hsub">CRM Dashboard</div></div></div><div style="display:flex;align-items:center;gap:14px"><div style="text-align:right"><span style="font-size:13px;font-weight:600">'+user.name+'</span> <span class="ubadge ubadge-admin">Admin</span><div style="font-size:11px;color:var(--fg-muted);margin-top:2px">'+user.email+'</div></div><button class="bo" onclick="doLogout()">Log Out</button></div></div>';
-  h+='<div class="sec"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Secured with Supabase Auth</div>';
-
-  // Tabs
-  var tabs=[{k:'crm',l:'Contacts'},{k:'leads',l:'Incoming Leads'+(leads.length?' ('+leads.length+')':'')},{k:'form',l:'Test Form'}];
-  h+='<div class="tabs">'+tabs.map(function(t){return '<button class="tab '+(curTab===t.k?'on':'')+'" onclick="curTab=\''+t.k+'\';render()">'+t.l+(t.k==='leads'&&leads.length&&curTab!=='leads'?'<span class="dot"></span>':'')+'</button>'}).join('')+'</div>';
-
-  // Leads
-  if(curTab==='leads'){
-    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><h3 style="font-size:18px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em">Incoming Leads</h3>'+(leads.length?'<button class="ba" onclick="addAllL()">Add All ('+leads.length+')</button>':'')+'</div>';
-    if(!leads.length)h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:3px;padding:48px;text-align:center;color:var(--fg-muted)"><div style="font-family:Montserrat,sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em">No new leads</div><div style="font-size:13px;margin-top:6px">Website submissions appear here.</div></div>';
-    else leads.forEach(function(l){h+='<div class="li2" onclick="showLD('+l.id+')"><div><div style="font-weight:600;font-size:14px">'+l.name+' <span style="color:var(--fg-muted);font-weight:400">- '+(l.brand||'')+'</span></div><div style="font-size:12px;color:var(--fg-muted);margin-top:4px">'+l.email+' | '+(l.phone||'-')+' | '+fD(l.created_at)+'</div></div>'+sbdg('New Lead')+'</div>'});
-  }
-
-  // Test Form
-  if(curTab==='form'){
-    h+='<div style="font-size:13px;color:var(--fg-muted);margin-bottom:20px">Simulates your website form.</div>';
-    h+='<div class="fsm"><div style="font-family:Montserrat,sans-serif;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;font-weight:700;margin-bottom:20px">Website Form Preview</div>';
-    h+='<div class="fr"><div><label class="lbl">Name</label><input class="inp" id="sn"></div><div><label class="lbl">Brand</label><input class="inp" id="sb2"></div></div>';
-    h+='<div class="fr"><div><label class="lbl">Email</label><input class="inp" id="se"></div><div><label class="lbl">Phone</label><div class="phr"><select class="phc" id="scc">'+copts('+1')+'</select><input class="inp" id="sp" style="flex:1"></div></div></div>';
-    h+='<div class="fr"><div><label class="lbl">Revenue</label><select class="inp" id="sr">'+ropts('')+'</select></div><div><label class="lbl">ACOS</label><input class="inp" id="sa"></div></div>';
-    h+='<div><label class="lbl">Challenge</label><textarea class="inp" id="sch" style="min-height:70px;resize:vertical"></textarea></div>';
-    h+='<button class="bau" id="sbtn" onclick="simSub()">Book My Free Audit</button></div>';
-  }
-
-  // CRM
-  if(curTab==='crm'){
-    var cl=contacts.filter(function(c){return c.stage==='Closed'}).length;
-    var nl=contacts.filter(function(c){return c.stage==='New Lead'}).length;
-    h+='<div class="sts"><div class="st"><div class="stl">Contacts</div><div class="stv">'+contacts.length+'</div></div><div class="st"><div class="stl">New Leads</div><div class="stv" style="color:var(--accent)">'+nl+'</div></div><div class="st"><div class="stl">Closed</div><div class="stv" style="color:#10b981">'+cl+'</div></div><div class="st"><div class="stl">Conversion</div><div class="stv" style="color:var(--gold)">'+(contacts.length?Math.round(cl/contacts.length*100)+'%':'0%')+'</div></div></div>';
-    h+='<div class="tb"><input class="inp" placeholder="Search..." value="'+sq+'" oninput="sq=this.value;render()"><select onchange="sf=this.value;render()"><option value="All" '+(sf==='All'?'selected':'')+'>All Stages</option>'+STAGES.map(function(s){return '<option value="'+s+'" '+(sf===s?'selected':'')+'>'+s+'</option>'}).join('')+'</select><div class="tbr"><button class="bv '+(curView==='table'?'on':'')+'" onclick="curView=\'table\';render()">Table</button><button class="bv '+(curView==='pipeline'?'on':'')+'" onclick="curView=\'pipeline\';render()">Pipeline</button><button class="ba" onclick="showCF()">+ Add</button></div></div>';
-    var fl=contacts.filter(function(c){return sf==='All'||c.stage===sf}).filter(function(c){var q=sq.toLowerCase();return(c.name||'').toLowerCase().indexOf(q)>=0||(c.brand||'').toLowerCase().indexOf(q)>=0||(c.email||'').toLowerCase().indexOf(q)>=0});
-    if(curView==='table'){
-      h+='<div class="tw"><table><thead><tr><th>Name</th><th>Brand</th><th>Email</th><th>Phone</th><th>Revenue</th><th>ACOS</th><th>Stage</th><th>Date</th></tr></thead><tbody>';
-      fl.forEach(function(c){h+='<tr class="cl" onclick="viewContact('+c.id+')"><td style="font-weight:600">'+c.name+'</td><td style="color:var(--fg-muted)">'+(c.brand||'-')+'</td><td style="color:var(--fg-muted)">'+c.email+'</td><td style="color:var(--fg-muted);font-size:12px">'+(c.phone||'-')+'</td><td style="color:var(--fg-muted);font-size:12px">'+(c.revenue||'-')+'</td><td style="color:var(--fg-muted);font-size:12px">'+(c.acos||'-')+'</td><td>'+sbdg(c.stage)+'</td><td style="color:var(--fg-muted);font-size:12px">'+fD(c.created_at)+'</td></tr>'});
-      if(!fl.length)h+='<tr><td colspan="8" style="padding:40px;text-align:center;color:var(--fg-muted);font-family:Montserrat,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase">No contacts found</td></tr>';
-      h+='</tbody></table></div>';
-    }else{
-      h+='<div class="pp">';
-      STAGES.forEach(function(st){var sc=fl.filter(function(c){return c.stage===st});var clr=SCLR[st];h+='<div class="pc" style="border-color:'+clr+'"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-family:Montserrat,sans-serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em">'+st+'</span><span class="bdg" style="background:'+clr+'15;color:'+clr+';border:1px solid '+clr+'30">'+sc.length+'</span></div>';sc.forEach(function(c){h+='<div class="pk" onclick="viewContact('+c.id+')"><div style="font-weight:600;font-size:12px">'+c.name+'</div><div style="font-size:11px;color:var(--fg-muted);margin-top:3px">'+(c.brand||'-')+'</div><div style="font-size:11px;color:'+clr+';margin-top:5px;font-weight:600;font-family:Montserrat,sans-serif">'+(c.revenue||'-')+'</div></div>'});h+='</div>'});
-      h+='</div>';
-    }
-  }
-  h+='<button class="brf" onclick="location.reload()" title="Refresh"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg></button>';
-  document.getElementById('dc').innerHTML=h;
-}
-
-function showCF(id){
-  var c=id?contacts.find(function(x){return x.id===id}):null;var e=!!c;
-  var ph=c?c.phone||'':'',cc='+1',nm=ph;
-  CODES.forEach(function(x){if(ph.indexOf(x.c+' ')===0){cc=x.c;nm=ph.slice(x.c.length+1)}});
-  var html='<div class="mbg" onclick="clM()"><div class="mbox" onclick="event.stopPropagation()"><div class="mtitle">'+(e?'Edit Contact':'New Contact')+'</div>';
-  html+='<div class="fr"><div><label class="lbl">Name</label><input class="inp" id="mn" value="'+(c?c.name:'')+'"></div><div><label class="lbl">Brand</label><input class="inp" id="mb" value="'+(c?c.brand:'')+'"></div></div>';
-  html+='<div class="fr"><div><label class="lbl">Email</label><input class="inp" id="me" value="'+(c?c.email:'')+'"></div><div><label class="lbl">Phone</label><div class="phr"><select class="phc" id="mc">'+copts(cc)+'</select><input class="inp" id="mp" value="'+nm+'" style="flex:1"></div></div></div>';
-  html+='<div class="fr"><div><label class="lbl">Revenue</label><select class="inp" id="mr">'+ropts(c?c.revenue:'')+'</select></div><div><label class="lbl">ACOS</label><input class="inp" id="ma" value="'+(c?c.acos:'')+'"></div></div>';
-  html+='<div class="fr"><div><label class="lbl">Stage</label><select class="inp" id="ms">'+sopts(c?c.stage:'New Lead')+'</select></div></div>';
-  html+='<div class="fr"><div><label class="lbl">Challenge</label><textarea class="inp" id="mch">'+(c?c.challenge:'')+'</textarea></div></div>';
-  html+='<div class="fr"><div><label class="lbl">Notes</label><textarea class="inp" id="mnt" style="min-height:80px">'+(c?c.notes||'':'')+'</textarea></div></div>';
-  html+='<div class="br"><button class="bc" onclick="clM()">Cancel</button><button class="bs" onclick="savC('+(id||'null')+')">Save</button></div>';
-  if(e)html+='<button class="bd" onclick="delC('+id+');clM()">Delete</button>';
-  html+='</div></div>';
-  document.getElementById('mc2').innerHTML=html;
-}
-async function savC(id){
-  var o={name:document.getElementById('mn').value,brand:document.getElementById('mb').value,email:document.getElementById('me').value,phone:document.getElementById('mc').value+' '+document.getElementById('mp').value,revenue:document.getElementById('mr').value,acos:document.getElementById('ma').value,stage:document.getElementById('ms').value,challenge:document.getElementById('mch').value,notes:document.getElementById('mnt').value};
-  if(id){await sb.from('contacts').update(o).eq('id',id)}else{await sb.from('contacts').insert(o)}
-  await loadC();clM();render();
-}
-async function saveNotes(id){var n=document.getElementById('cdNotes').value;await sb.from('contacts').update({notes:n}).eq('id',id);await loadC();render()}
-async function updateStage(id,s){await sb.from('contacts').update({stage:s}).eq('id',id);await loadC();render()}
-async function delC(id){await sb.from('contacts').delete().eq('id',id);await loadC();viewCid=null;render()}
-
-function showLD(id){
-  var l=leads.find(function(x){return x.id===id});if(!l)return;
-  var html='<div class="mbg" onclick="clM()"><div class="mbox" onclick="event.stopPropagation()"><div class="mtitle">Lead Details</div>';
-  html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">';
-  [['Name',l.name],['Brand',l.brand||'-'],['Email',l.email],['Phone',l.phone||'-'],['Revenue',l.revenue||'-'],['ACOS',l.acos||'-']].forEach(function(x){html+='<div><div class="lbl">'+x[0]+'</div><div style="font-size:14px;font-weight:600;margin-top:4px">'+x[1]+'</div></div>'});
-  html+='</div>';
-  if(l.challenge)html+='<div><div class="lbl">Challenge</div><div style="font-size:14px;background:#111118;padding:12px 16px;border-radius:3px;border:1px solid var(--border);margin:6px 0 16px;line-height:1.6">'+l.challenge+'</div></div>';
-  html+='<div class="br"><button class="bc" onclick="clM()">Close</button><button class="bs" style="background:var(--gold);color:#121212" onclick="addL('+l.id+')">Add to CRM</button></div></div></div>';
-  document.getElementById('mc2').innerHTML=html;
-}
-async function addL(id){var l=leads.find(function(x){return x.id===id});if(!l)return;await sb.from('contacts').insert({name:l.name,brand:l.brand,email:l.email,phone:l.phone||'',stage:'New Lead',revenue:l.revenue||'',acos:l.acos||'',challenge:l.challenge||''});await sb.from('leads').update({added_to_crm:true}).eq('id',id);await loadC();await loadL();clM();curTab='crm';render()}
-async function addAllL(){var ins=leads.map(function(l){return{name:l.name,brand:l.brand,email:l.email,phone:l.phone||'',stage:'New Lead',revenue:l.revenue||'',acos:l.acos||'',challenge:l.challenge||''}});if(ins.length)await sb.from('contacts').insert(ins);var ids=leads.map(function(l){return l.id});if(ids.length)await sb.from('leads').update({added_to_crm:true}).in('id',ids);await loadC();await loadL();curTab='crm';render()}
-async function simSub(){var n=document.getElementById('sn').value,b=document.getElementById('sb2').value,e=document.getElementById('se').value;if(!n||!e){alert('Name and email required');return}var ph=document.getElementById('scc').value+' '+document.getElementById('sp').value.trim();var rv=document.getElementById('sr').value,ac=document.getElementById('sa').value,ch=document.getElementById('sch').value;var btn=document.getElementById('sbtn');btn.textContent='Submitting...';btn.classList.add('ok');await sb.from('leads').insert({name:n,brand:b,email:e,phone:ph.trim(),revenue:rv,acos:ac,challenge:ch,added_to_crm:false});btn.textContent='Submitted!';await loadL();setTimeout(function(){curTab='leads';render()},1500)}
-function clM(){document.getElementById('mc2').innerHTML=''}
-
-window.addEventListener('DOMContentLoaded',async function(){var sess=await sb.auth.getSession();if(sess.data.session){user={email:sess.data.session.user.email,role:'admin',name:'Admin'};showD()}else{document.getElementById('ls').classList.remove('hide');document.getElementById('ds').classList.add('hide')}});
+// 3D tilt effect
+document.querySelectorAll('.problem-card,.why-card,.result-card,.testi-card,.how-step,.proof-item,.forwho-card').forEach(function(el){
+  el.classList.add('tilt');
+  el.addEventListener('mousemove',function(e){
+    var r=el.getBoundingClientRect();
+    var x=(e.clientX-r.left)/r.width-.5;
+    var y=(e.clientY-r.top)/r.height-.5;
+    el.style.transform='perspective(600px) rotateY('+x*12+'deg) rotateX('+(-y*12)+'deg) translateY(-4px)';
+    el.style.boxShadow='0 24px 60px rgba(0,0,0,.4)';
+  });
+  el.addEventListener('mouseleave',function(){
+    el.style.transform='perspective(600px) rotateY(0deg) rotateX(0deg) translateY(0)';
+    el.style.boxShadow='';
+  });
+});
 </script>
-
-<div id="ls" class="lw">
-<div class="lb">
-<div class="lr"><div class="li">EZ<span>Launch</span>Lab</div></div>
-<div class="lsub">Sign in to your CRM</div>
-<div id="lerr" class="eb hide"></div>
-<div class="fld"><label class="lbl">Email</label><input class="inp" id="le" type="email" placeholder="you@ezlaunchlab.com"></div>
-<div class="fld"><label class="lbl">Password</label><div class="pww"><input class="inp" id="lp" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()"><button class="pwt" onclick="var i=document.getElementById('lp');i.type=i.type==='password'?'text':'password';this.textContent=i.type==='password'?'Show':'Hide'">Show</button></div></div>
-<button class="bl" onclick="doLogin()">Sign In</button>
-</div>
-</div>
-
-<div id="ds" class="d hide"><div id="dc"></div></div>
-<div id="mc2"></div>
 </body>
 </html>
